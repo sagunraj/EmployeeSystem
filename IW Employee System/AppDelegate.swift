@@ -22,8 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupAccountStoryboard(){
         let accountStoryboard = UIStoryboard(name: "AccountStoryboard", bundle: nil)
-        if let loginVC = accountStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-            window?.rootViewController = loginVC
+        if let loginVC = accountStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as? UIViewController {
+            let navController = UINavigationController(rootViewController: loginVC)
+            navController.setNavigationBarHidden(true, animated: true)
+            window?.rootViewController = navController
             window?.makeKeyAndVisible()
         }
     }

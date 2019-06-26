@@ -17,10 +17,24 @@ class SignUpViewController: KeyboardAvoidingViewController {
     @IBOutlet var phoneTxtField: UITextField!
     @IBOutlet var locationTxtField: UITextField!
     
+    @IBOutlet weak var agreeSwitch: UISwitch!
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setInitialSwitchValue()
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    
+
         kaScrollView = scrollView
         setTxtFields()
+    }
+    
+    private func setInitialSwitchValue(){
+        agreeSwitch?.isOn = false
+        agreeSwitch?.setOn(false, animated: true)
     }
     
     private func setTxtFields() {
@@ -36,5 +50,22 @@ class SignUpViewController: KeyboardAvoidingViewController {
         phoneTxtField.autocorrectionType = .no
         locationTxtField.autocorrectionType = .no
     }
+}
+
+// MARK: - IBActions of SignUpViewController
+extension SignUpViewController {
+    @IBAction func onSwitchTap(_ sender: UISwitch) {
+        if let agreeSwitchValue = agreeSwitch {
+            if agreeSwitchValue.isOn {
+                agreeSwitch.setOn(false, animated: true)
+            }
+            else {
+                agreeSwitch.setOn(true, animated: true)
+            }
+        }
+    }
     
+    @IBAction func onSignUpTap(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
 }
