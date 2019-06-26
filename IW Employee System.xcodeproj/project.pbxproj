@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA74AEFB22C364D50038DCEF /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AEFA22C364D50038DCEF /* StringConstants.swift */; };
 		BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADBAE8A22C1DF4700E38EBA /* AppDelegate.swift */; };
 		BADBAE8D22C1DF4700E38EBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADBAE8C22C1DF4700E38EBA /* ViewController.swift */; };
 		BADBAE9022C1DF4700E38EBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BADBAE8E22C1DF4700E38EBA /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA74AEFA22C364D50038DCEF /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		BADBAE8722C1DF4700E38EBA /* IW Employee System.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IW Employee System.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BADBAE8A22C1DF4700E38EBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BADBAE8C22C1DF4700E38EBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA74AEF922C364C00038DCEF /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				BA74AEFA22C364D50038DCEF /* StringConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		BADBAE7E22C1DF4700E38EBA = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +76,7 @@
 		BADBAE8922C1DF4700E38EBA /* IW Employee System */ = {
 			isa = PBXGroup;
 			children = (
+				BA74AEF922C364C00038DCEF /* Constants */,
 				BADBAEA622C233CC00E38EBA /* Libraries */,
 				BADBAE9C22C1DF5400E38EBA /* Modules */,
 				BADBAE8A22C1DF4700E38EBA /* AppDelegate.swift */,
@@ -206,6 +217,7 @@
 				BADBAEAD22C2340000E38EBA /* AccessoryBar.swift in Sources */,
 				BADBAEA222C1DF9A00E38EBA /* LoginViewController.swift in Sources */,
 				BADBAE8D22C1DF4700E38EBA /* ViewController.swift in Sources */,
+				BA74AEFB22C364D50038DCEF /* StringConstants.swift in Sources */,
 				BADBAEA522C1E03B00E38EBA /* SignUpViewController.swift in Sources */,
 				BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */,
 				BADBAEAC22C2340000E38EBA /* KeyboardAvoidingViewController.swift in Sources */,

@@ -307,6 +307,7 @@
                         <viewLayoutGuide key="safeArea" id="Xpy-2x-uGv"/>
                     </view>
                     <connections>
+                        <outlet property="agreeSwitch" destination="1Re-8F-NYa" id="1Jr-4d-5Hk"/>
                         <outlet property="emailTxtField" destination="42S-px-Yfh" id="7ho-Q8-Ia6"/>
                         <outlet property="fNameTxtField" destination="6rw-WI-1S6" id="vMS-0R-KJm"/>
                         <outlet property="locationTxtField" destination="W71-z1-0KO" id="R6J-to-bwH"/>

@@ -24,16 +24,18 @@ class SignUpViewController: KeyboardAvoidingViewController {
         super.viewDidLoad()
         
         setInitialSwitchValue()
-        
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    
-        kaScrollView = scrollView
+        setupView()
         setTxtFields()
     }
     
+    private func setupView() {
+        kaScrollView = scrollView
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     private func setInitialSwitchValue(){
-        agreeSwitch?.isOn = false
-        agreeSwitch?.setOn(false, animated: true)
+        agreeSwitch.isOn = false
+        agreeSwitch.setOn(false, animated: true)
     }
     
     private func setTxtFields() {
@@ -49,22 +51,30 @@ class SignUpViewController: KeyboardAvoidingViewController {
         phoneTxtField.autocorrectionType = .no
         locationTxtField.autocorrectionType = .no
     }
+    
+    private func createAlertAfterSignUp() {
+        let alertController = UIAlertController(title: StringConstants.signUpAlertControllerTitle,
+                                                message: StringConstants.signUpAlertControllerMessage,
+                                                preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: StringConstants.signUpAlertActionTitle,
+                                        style: .default, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        })
+        alertController.addAction(alertAction)
+        present(alertController, animated: true)
+    }
+    
 }
 
 // MARK: - IBActions of SignUpViewController
 extension SignUpViewController {
+    
     @IBAction func onSwitchTap(_ sender: UISwitch) {
-        if let agreeSwitchValue = agreeSwitch {
-            if agreeSwitchValue.isOn {
-                agreeSwitch.setOn(false, animated: true)
-            }
-            else {
-                agreeSwitch.setOn(true, animated: true)
-            }
-        }
+        agreeSwitch.setOn(!agreeSwitch.isOn, animated: true)
     }
     
     @IBAction func onSignUpTap(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+       createAlertAfterSignUp()
     }
+    
 }
