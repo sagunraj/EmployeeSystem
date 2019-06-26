@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		BA74AEFB22C364D50038DCEF /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AEFA22C364D50038DCEF /* StringConstants.swift */; };
+		BA74AEFF22C3780F0038DCEF /* FormValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AEFE22C3780F0038DCEF /* FormValidation.swift */; };
+		BA74AF0122C37BA00038DCEF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0022C37BA00038DCEF /* LoginModel.swift */; };
+		BA74AF0322C381320038DCEF /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0222C381320038DCEF /* SignUpModel.swift */; };
+		BA74AF0622C382AB0038DCEF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0522C382AB0038DCEF /* StringExtension.swift */; };
+		BA74AF0822C383D20038DCEF /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0722C383D20038DCEF /* IntExtension.swift */; };
+		BA74AF0A22C384500038DCEF /* BoolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0922C384500038DCEF /* BoolExtension.swift */; };
+		BA74AF0E22C38BFF0038DCEF /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0D22C38BFF0038DCEF /* UIViewControllerExtension.swift */; };
 		BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADBAE8A22C1DF4700E38EBA /* AppDelegate.swift */; };
 		BADBAE8D22C1DF4700E38EBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADBAE8C22C1DF4700E38EBA /* ViewController.swift */; };
 		BADBAE9022C1DF4700E38EBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BADBAE8E22C1DF4700E38EBA /* Main.storyboard */; };
@@ -23,6 +30,13 @@
 
 /* Begin PBXFileReference section */
 		BA74AEFA22C364D50038DCEF /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
+		BA74AEFE22C3780F0038DCEF /* FormValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidation.swift; sourceTree = "<group>"; };
+		BA74AF0022C37BA00038DCEF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		BA74AF0222C381320038DCEF /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		BA74AF0522C382AB0038DCEF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		BA74AF0722C383D20038DCEF /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		BA74AF0922C384500038DCEF /* BoolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtension.swift; sourceTree = "<group>"; };
+		BA74AF0D22C38BFF0038DCEF /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		BADBAE8722C1DF4700E38EBA /* IW Employee System.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IW Employee System.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BADBAE8A22C1DF4700E38EBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BADBAE8C22C1DF4700E38EBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +71,25 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		BA74AEFC22C373500038DCEF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BA74AEFE22C3780F0038DCEF /* FormValidation.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BA74AF0422C382900038DCEF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BA74AF0522C382AB0038DCEF /* StringExtension.swift */,
+				BA74AF0722C383D20038DCEF /* IntExtension.swift */,
+				BA74AF0922C384500038DCEF /* BoolExtension.swift */,
+				BA74AF0D22C38BFF0038DCEF /* UIViewControllerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BADBAE7E22C1DF4700E38EBA = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +109,8 @@
 		BADBAE8922C1DF4700E38EBA /* IW Employee System */ = {
 			isa = PBXGroup;
 			children = (
+				BA74AF0422C382900038DCEF /* Extensions */,
+				BA74AEFC22C373500038DCEF /* Helpers */,
 				BA74AEF922C364C00038DCEF /* Constants */,
 				BADBAEA622C233CC00E38EBA /* Libraries */,
 				BADBAE9C22C1DF5400E38EBA /* Modules */,
@@ -111,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				BADBAEA122C1DF9A00E38EBA /* LoginViewController.swift */,
+				BA74AF0022C37BA00038DCEF /* LoginModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -119,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				BADBAEA422C1E03B00E38EBA /* SignUpViewController.swift */,
+				BA74AF0222C381320038DCEF /* SignUpModel.swift */,
 			);
 			path = "Sign Up";
 			sourceTree = "<group>";
@@ -216,10 +253,17 @@
 			files = (
 				BADBAEAD22C2340000E38EBA /* AccessoryBar.swift in Sources */,
 				BADBAEA222C1DF9A00E38EBA /* LoginViewController.swift in Sources */,
+				BA74AF0E22C38BFF0038DCEF /* UIViewControllerExtension.swift in Sources */,
 				BADBAE8D22C1DF4700E38EBA /* ViewController.swift in Sources */,
 				BA74AEFB22C364D50038DCEF /* StringConstants.swift in Sources */,
+				BA74AF0122C37BA00038DCEF /* LoginModel.swift in Sources */,
+				BA74AF0A22C384500038DCEF /* BoolExtension.swift in Sources */,
+				BA74AF0822C383D20038DCEF /* IntExtension.swift in Sources */,
 				BADBAEA522C1E03B00E38EBA /* SignUpViewController.swift in Sources */,
 				BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */,
+				BA74AF0322C381320038DCEF /* SignUpModel.swift in Sources */,
+				BA74AEFF22C3780F0038DCEF /* FormValidation.swift in Sources */,
+				BA74AF0622C382AB0038DCEF /* StringExtension.swift in Sources */,
 				BADBAEAC22C2340000E38EBA /* KeyboardAvoidingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

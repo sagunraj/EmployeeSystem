@@ -28,6 +28,10 @@ class SignUpViewController: KeyboardAvoidingViewController {
         setTxtFields()
     }
     
+    static func getInstance() -> SignUpViewController? {
+        return UIStoryboard(name: "AccountStoryboard", bundle: nil).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
+    }
+    
     private func setupView() {
         kaScrollView = scrollView
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -53,15 +57,10 @@ class SignUpViewController: KeyboardAvoidingViewController {
     }
     
     private func createAlertAfterSignUp() {
-        let alertController = UIAlertController(title: StringConstants.signUpAlertControllerTitle,
-                                                message: StringConstants.signUpAlertControllerMessage,
-                                                preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: StringConstants.signUpAlertActionTitle,
-                                        style: .default, handler: { _ in
+        showAlert(alertTitle: StringConstants.strings["signUpAlertControllerTitle"]!, alertMessage: StringConstants.strings["signUpAlertControllerMessage"]!, alertActionTitle: StringConstants.strings["signUpAlertActionTitle"]!, handler: {
+            _ in
             self.navigationController?.popViewController(animated: true)
         })
-        alertController.addAction(alertAction)
-        present(alertController, animated: true)
     }
     
 }
@@ -70,7 +69,7 @@ class SignUpViewController: KeyboardAvoidingViewController {
 extension SignUpViewController {
     
     @IBAction func onSwitchTap(_ sender: UISwitch) {
-        agreeSwitch.setOn(!agreeSwitch.isOn, animated: true)
+        agreeSwitch.setOn(agreeSwitch.isOn.toggled, animated: true)
     }
     
     @IBAction func onSignUpTap(_ sender: UIButton) {

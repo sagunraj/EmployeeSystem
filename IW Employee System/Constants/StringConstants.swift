@@ -9,7 +9,11 @@
 import Foundation
 
 class StringConstants {
-   static let signUpAlertControllerTitle = "Cheers"
-   static let signUpAlertControllerMessage = "You have completed signing up. Now you can login!"
-   static let signUpAlertActionTitle = "Okay"
+    static let strings = [
+        "signUpAlertControllerTitle": "Cheers",
+        "signUpAlertControllerMessage": "You have completed signing up. Now you can login!",
+        "signUpAlertActionTitle": "Okay",
+        "error": "Error",
+        "required": "Please fill up all fields."
+    ]
 }
