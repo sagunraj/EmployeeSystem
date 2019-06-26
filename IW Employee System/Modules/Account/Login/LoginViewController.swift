@@ -8,11 +8,24 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: KeyboardAvoidingViewController {
         
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextFIeld: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        kaScrollView = scrollView
+    }
+    
+    private func setTextFields(){
+        emailTextField.delegate = self
+        passwordTextFIeld.delegate = self
+        
+        emailTextField.autocorrectionType = .no
+        passwordTextFIeld.autocorrectionType = .no
     }
     
     override func viewWillAppear(_ animated: Bool) {

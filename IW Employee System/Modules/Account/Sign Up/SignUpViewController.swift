@@ -27,7 +27,6 @@ class SignUpViewController: KeyboardAvoidingViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
     
-
         kaScrollView = scrollView
         setTxtFields()
     }
