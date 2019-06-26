@@ -18,6 +18,7 @@ class LoginViewController: KeyboardAvoidingViewController {
         super.viewDidLoad()
         
         kaScrollView = scrollView
+        setTextFields()
     }
     
     private func setTextFields(){
