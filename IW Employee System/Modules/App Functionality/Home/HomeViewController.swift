@@ -15,3 +15,13 @@ class HomeViewController: UIViewController {
     }
     
 }
+
+extension HomeViewController {
+    
+    @IBAction func onViewDetailsTap(_ sender: UIButton) {
+        
+        guard let detailsVC = DetailsViewController.getInstance() else { return }
+        navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+}

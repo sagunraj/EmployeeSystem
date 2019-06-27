@@ -13,6 +13,7 @@
 		BA63445B22C488040024CB25 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63445A22C488040024CB25 /* SettingsViewController.swift */; };
 		BA63445F22C48A190024CB25 /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63445E22C48A190024CB25 /* HomeStoryboard.storyboard */; };
 		BA63446122C48A280024CB25 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63446022C48A280024CB25 /* SettingsStoryboard.storyboard */; };
+		BA63446322C499C50024CB25 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63446222C499C50024CB25 /* DetailsViewController.swift */; };
 		BA74AEFB22C364D50038DCEF /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AEFA22C364D50038DCEF /* StringConstants.swift */; };
 		BA74AEFF22C3780F0038DCEF /* FormValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AEFE22C3780F0038DCEF /* FormValidation.swift */; };
 		BA74AF0122C37BA00038DCEF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0022C37BA00038DCEF /* LoginModel.swift */; };
@@ -41,6 +42,7 @@
 		BA63445A22C488040024CB25 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BA63445E22C48A190024CB25 /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
 		BA63446022C48A280024CB25 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
+		BA63446222C499C50024CB25 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		BA74AEFA22C364D50038DCEF /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		BA74AEFE22C3780F0038DCEF /* FormValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidation.swift; sourceTree = "<group>"; };
 		BA74AF0022C37BA00038DCEF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				BA63445822C485CC0024CB25 /* HomeViewController.swift */,
 				BA63445E22C48A190024CB25 /* HomeStoryboard.storyboard */,
+				BA63446222C499C50024CB25 /* DetailsViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				BA74AF0822C383D20038DCEF /* IntExtension.swift in Sources */,
 				BADBAEA522C1E03B00E38EBA /* SignUpViewController.swift in Sources */,
 				BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */,
+				BA63446322C499C50024CB25 /* DetailsViewController.swift in Sources */,
 				BA63445922C485CC0024CB25 /* HomeViewController.swift in Sources */,
 				BA63445B22C488040024CB25 /* SettingsViewController.swift in Sources */,
 				BA74AF0322C381320038DCEF /* SignUpModel.swift in Sources */,
