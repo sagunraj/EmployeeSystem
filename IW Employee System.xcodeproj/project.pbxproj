@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA63445422C47A4E0024CB25 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63445322C47A4E0024CB25 /* AppTabBarController.swift */; };
+		BA63445722C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63445622C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard */; };
+		BA63445922C485CC0024CB25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63445822C485CC0024CB25 /* HomeViewController.swift */; };
+		BA63445B22C488040024CB25 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63445A22C488040024CB25 /* SettingsViewController.swift */; };
+		BA63445F22C48A190024CB25 /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63445E22C48A190024CB25 /* HomeStoryboard.storyboard */; };
+		BA63446122C48A280024CB25 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63446022C48A280024CB25 /* SettingsStoryboard.storyboard */; };
 		BA74AEFB22C364D50038DCEF /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AEFA22C364D50038DCEF /* StringConstants.swift */; };
 		BA74AEFF22C3780F0038DCEF /* FormValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AEFE22C3780F0038DCEF /* FormValidation.swift */; };
 		BA74AF0122C37BA00038DCEF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0022C37BA00038DCEF /* LoginModel.swift */; };
@@ -29,6 +35,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA63445322C47A4E0024CB25 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
+		BA63445622C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppFunctionalityStoryboard.storyboard; sourceTree = "<group>"; };
+		BA63445822C485CC0024CB25 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BA63445A22C488040024CB25 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		BA63445E22C48A190024CB25 /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
+		BA63446022C48A280024CB25 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		BA74AEFA22C364D50038DCEF /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		BA74AEFE22C3780F0038DCEF /* FormValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidation.swift; sourceTree = "<group>"; };
 		BA74AF0022C37BA00038DCEF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -63,6 +75,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA63445222C47A3A0024CB25 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				BA63445322C47A4E0024CB25 /* AppTabBarController.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		BA63445522C47B660024CB25 /* App Functionality */ = {
+			isa = PBXGroup;
+			children = (
+				BA63445D22C489FD0024CB25 /* Home */,
+				BA63445C22C489F70024CB25 /* Settings */,
+				BA63445222C47A3A0024CB25 /* Dashboard */,
+				BA63445622C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard */,
+			);
+			path = "App Functionality";
+			sourceTree = "<group>";
+		};
+		BA63445C22C489F70024CB25 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BA63446022C48A280024CB25 /* SettingsStoryboard.storyboard */,
+				BA63445A22C488040024CB25 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		BA63445D22C489FD0024CB25 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BA63445822C485CC0024CB25 /* HomeViewController.swift */,
+				BA63445E22C48A190024CB25 /* HomeStoryboard.storyboard */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		BA74AEF922C364C00038DCEF /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +176,7 @@
 		BADBAE9C22C1DF5400E38EBA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				BA63445522C47B660024CB25 /* App Functionality */,
 				BADBAE9D22C1DF5C00E38EBA /* Account */,
 			);
 			path = Modules;
@@ -240,6 +290,9 @@
 				BADBAE9F22C1DF7D00E38EBA /* AccountStoryboard.storyboard in Resources */,
 				BADBAEAB22C2340000E38EBA /* AccessoryBar.xib in Resources */,
 				BADBAE9222C1DF4900E38EBA /* Assets.xcassets in Resources */,
+				BA63445F22C48A190024CB25 /* HomeStoryboard.storyboard in Resources */,
+				BA63445722C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard in Resources */,
+				BA63446122C48A280024CB25 /* SettingsStoryboard.storyboard in Resources */,
 				BADBAE9022C1DF4700E38EBA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,9 +311,12 @@
 				BA74AEFB22C364D50038DCEF /* StringConstants.swift in Sources */,
 				BA74AF0122C37BA00038DCEF /* LoginModel.swift in Sources */,
 				BA74AF0A22C384500038DCEF /* BoolExtension.swift in Sources */,
+				BA63445422C47A4E0024CB25 /* AppTabBarController.swift in Sources */,
 				BA74AF0822C383D20038DCEF /* IntExtension.swift in Sources */,
 				BADBAEA522C1E03B00E38EBA /* SignUpViewController.swift in Sources */,
 				BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */,
+				BA63445922C485CC0024CB25 /* HomeViewController.swift in Sources */,
+				BA63445B22C488040024CB25 /* SettingsViewController.swift in Sources */,
 				BA74AF0322C381320038DCEF /* SignUpModel.swift in Sources */,
 				BA74AEFF22C3780F0038DCEF /* FormValidation.swift in Sources */,
 				BA74AF0622C382AB0038DCEF /* StringExtension.swift in Sources */,

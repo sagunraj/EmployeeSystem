@@ -11,10 +11,11 @@ import Foundation
 struct FormValidation {
     
     static func requiredValidation(_ value: String) -> Bool {
-        if value.count > 0 {
-            return true
-        }
-        return false
+        return !value.isEmpty
     }
     
+    static func emailValidation(_ value: String) -> Bool {
+        let REGEX = "[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2,6}"
+        return NSPredicate(format: "SELF MATCHES %@", REGEX).evaluate(with: value)
+    }
 }

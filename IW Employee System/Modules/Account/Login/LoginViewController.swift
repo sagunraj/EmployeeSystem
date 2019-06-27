@@ -33,6 +33,19 @@ class LoginViewController: KeyboardAvoidingViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         super.viewWillAppear(animated)
     }
+    
+    private func loadAppFunctionalityStoryboard(){
+        
+        let appFunctionalityStoryboard = UIStoryboard(name: "AppFunctionalityStoryboard", bundle: nil)
+        if let tabBarVC = appFunctionalityStoryboard.instantiateViewController(withIdentifier: "AppTabBarController") as? AppTabBarController {
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate // taken reference of AppDelegate to access window variable for setting up the rootViewController after login
+            let window = appDelegate.window
+            
+            window?.rootViewController = tabBarVC
+            window?.makeKeyAndVisible()
+        }
+    }
 }
 
 extension LoginViewController {
@@ -45,7 +58,9 @@ extension LoginViewController {
     @IBAction func onLoginTap(_ sender: UIButton) {
         let loginModel = LoginModel(email: emailTextField.text.unWrapped.trimmed , password: passwordTextField.text.unWrapped.trimmed)
         if FormValidation.requiredValidation(loginModel.email) && FormValidation.requiredValidation(loginModel.password) {
-            
+            if FormValidation.emailValidation(loginModel.email) {
+                loadAppFunctionalityStoryboard()
+            }
         }
         else {
             showAlert(alertTitle: StringConstants.strings["error"]!, alertMessage: StringConstants.strings["required"]!, alertActionTitle: StringConstants.strings["signUpAlertActionTitle"]!, handler: { _ in })
