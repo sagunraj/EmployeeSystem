@@ -21,6 +21,8 @@ class HomeViewController: UIViewController {
         loadDataFromAPI()
     }
     
+  
+    
     private func loadDataFromAPI(){
         activityIndicator.startAnimating()
 
@@ -49,6 +51,7 @@ class HomeViewController: UIViewController {
         }
         task.resume()
     }
+    
     
     private func setUpTableView() {
         navigationItem.title = StringConstants.strings["employeeList"]
@@ -90,5 +93,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.navigationController?.pushViewController(detailsVC!, animated: true)
     }
-    
 }
+
+
