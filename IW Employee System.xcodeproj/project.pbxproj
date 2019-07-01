@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA2AE1BB22C5DB71008A70E2 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AE1BA22C5DB71008A70E2 /* Employee.swift */; };
 		BA63445422C47A4E0024CB25 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63445322C47A4E0024CB25 /* AppTabBarController.swift */; };
 		BA63445722C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63445622C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard */; };
 		BA63445922C485CC0024CB25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63445822C485CC0024CB25 /* HomeViewController.swift */; };
@@ -22,6 +23,8 @@
 		BA74AF0822C383D20038DCEF /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0722C383D20038DCEF /* IntExtension.swift */; };
 		BA74AF0A22C384500038DCEF /* BoolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0922C384500038DCEF /* BoolExtension.swift */; };
 		BA74AF0E22C38BFF0038DCEF /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74AF0D22C38BFF0038DCEF /* UIViewControllerExtension.swift */; };
+		BAB22F2622C9C815008FC03A /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB22F2422C9C815008FC03A /* EmployeeTableViewCell.swift */; };
+		BAB22F2722C9C815008FC03A /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB22F2522C9C815008FC03A /* EmployeeTableViewCell.xib */; };
 		BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADBAE8A22C1DF4700E38EBA /* AppDelegate.swift */; };
 		BADBAE8D22C1DF4700E38EBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADBAE8C22C1DF4700E38EBA /* ViewController.swift */; };
 		BADBAE9022C1DF4700E38EBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BADBAE8E22C1DF4700E38EBA /* Main.storyboard */; };
@@ -36,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA2AE1BA22C5DB71008A70E2 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		BA63445322C47A4E0024CB25 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
 		BA63445622C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppFunctionalityStoryboard.storyboard; sourceTree = "<group>"; };
 		BA63445822C485CC0024CB25 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +55,8 @@
 		BA74AF0722C383D20038DCEF /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		BA74AF0922C384500038DCEF /* BoolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtension.swift; sourceTree = "<group>"; };
 		BA74AF0D22C38BFF0038DCEF /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		BAB22F2422C9C815008FC03A /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
+		BAB22F2522C9C815008FC03A /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
 		BADBAE8722C1DF4700E38EBA /* IW Employee System.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IW Employee System.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BADBAE8A22C1DF4700E38EBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BADBAE8C22C1DF4700E38EBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA2AE1BE22C5E0BB008A70E2 /* Employee List */ = {
+			isa = PBXGroup;
+			children = (
+				BA2AE1BA22C5DB71008A70E2 /* Employee.swift */,
+			);
+			path = "Employee List";
+			sourceTree = "<group>";
+		};
 		BA63445222C47A3A0024CB25 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +122,7 @@
 		BA63445D22C489FD0024CB25 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				BA2AE1BE22C5E0BB008A70E2 /* Employee List */,
 				BA63445822C485CC0024CB25 /* HomeViewController.swift */,
 				BA63445E22C48A190024CB25 /* HomeStoryboard.storyboard */,
 				BA63446222C499C50024CB25 /* DetailsViewController.swift */,
@@ -142,6 +157,31 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		BAB22F2122C9C7EC008FC03A /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				BAB22F2222C9C7F6008FC03A /* Cells */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		BAB22F2222C9C7F6008FC03A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BAB22F2322C9C7FB008FC03A /* EmployeeCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		BAB22F2322C9C7FB008FC03A /* EmployeeCell */ = {
+			isa = PBXGroup;
+			children = (
+				BAB22F2422C9C815008FC03A /* EmployeeTableViewCell.swift */,
+				BAB22F2522C9C815008FC03A /* EmployeeTableViewCell.xib */,
+			);
+			path = EmployeeCell;
+			sourceTree = "<group>";
+		};
 		BADBAE7E22C1DF4700E38EBA = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +201,7 @@
 		BADBAE8922C1DF4700E38EBA /* IW Employee System */ = {
 			isa = PBXGroup;
 			children = (
+				BAB22F2122C9C7EC008FC03A /* Custom Views */,
 				BA74AF0422C382900038DCEF /* Extensions */,
 				BA74AEFC22C373500038DCEF /* Helpers */,
 				BA74AEF922C364C00038DCEF /* Constants */,
@@ -289,6 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB22F2722C9C815008FC03A /* EmployeeTableViewCell.xib in Resources */,
 				BADBAE9522C1DF4900E38EBA /* LaunchScreen.storyboard in Resources */,
 				BADBAE9F22C1DF7D00E38EBA /* AccountStoryboard.storyboard in Resources */,
 				BADBAEAB22C2340000E38EBA /* AccessoryBar.xib in Resources */,
@@ -320,8 +362,10 @@
 				BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */,
 				BA63446322C499C50024CB25 /* DetailsViewController.swift in Sources */,
 				BA63445922C485CC0024CB25 /* HomeViewController.swift in Sources */,
+				BAB22F2622C9C815008FC03A /* EmployeeTableViewCell.swift in Sources */,
 				BA63445B22C488040024CB25 /* SettingsViewController.swift in Sources */,
 				BA74AF0322C381320038DCEF /* SignUpModel.swift in Sources */,
+				BA2AE1BB22C5DB71008A70E2 /* Employee.swift in Sources */,
 				BA74AEFF22C3780F0038DCEF /* FormValidation.swift in Sources */,
 				BA74AF0622C382AB0038DCEF /* StringExtension.swift in Sources */,
 				BADBAEAC22C2340000E38EBA /* KeyboardAvoidingViewController.swift in Sources */,
