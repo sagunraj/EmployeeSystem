@@ -17,7 +17,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = UIView()
         setUpTableView()
         loadDataFromAPI()
     }
@@ -52,6 +51,10 @@ class HomeViewController: UIViewController {
     }
     
     private func setUpTableView() {
+        navigationItem.title = StringConstants.strings["employeeList"]
+
+        tableView.tableFooterView = UIView()
+
         activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.center = tableView.center
         view.addSubview(activityIndicator)

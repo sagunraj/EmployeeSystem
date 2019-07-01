@@ -22,6 +22,9 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = StringConstants.strings["employeeDetails"]
+        
         loadData()
     }
     

@@ -18,17 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Employee List" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAh-NN-xbs">
-                                <rect key="frame" x="10" y="30" width="355" height="36"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="26"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKc-gx-1ZT">
-                                <rect key="frame" x="0.0" y="81" width="375" height="586"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DHU-6b-gCx">
-                                        <rect key="frame" x="0.0" y="0.0" width="365" height="586"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="365" height="603"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
@@ -43,17 +37,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fKc-gx-1ZT" firstAttribute="leading" secondItem="XoM-Qr-MJv" secondAttribute="leading" id="6ru-RQ-yXZ"/>
-                            <constraint firstItem="XoM-Qr-MJv" firstAttribute="bottom" secondItem="fKc-gx-1ZT" secondAttribute="bottom" id="L6j-ES-wSo"/>
-                            <constraint firstItem="XoM-Qr-MJv" firstAttribute="trailing" secondItem="fKc-gx-1ZT" secondAttribute="trailing" id="aTU-Uh-6vC"/>
-                            <constraint firstItem="fKc-gx-1ZT" firstAttribute="top" secondItem="hAh-NN-xbs" secondAttribute="bottom" constant="15" id="fPl-HF-zAF"/>
-                            <constraint firstItem="hAh-NN-xbs" firstAttribute="leading" secondItem="XoM-Qr-MJv" secondAttribute="leading" constant="10" id="fzl-sM-Jp8"/>
-                            <constraint firstItem="XoM-Qr-MJv" firstAttribute="trailing" secondItem="hAh-NN-xbs" secondAttribute="trailing" constant="10" id="jch-jK-FhG"/>
-                            <constraint firstItem="hAh-NN-xbs" firstAttribute="top" secondItem="XoM-Qr-MJv" secondAttribute="top" constant="10" id="tfW-8s-YwJ"/>
+                            <constraint firstItem="fKc-gx-1ZT" firstAttribute="leading" secondItem="XoM-Qr-MJv" secondAttribute="leading" id="8QS-kQ-aou"/>
+                            <constraint firstItem="XoM-Qr-MJv" firstAttribute="trailing" secondItem="fKc-gx-1ZT" secondAttribute="trailing" id="DBX-a9-pQe"/>
+                            <constraint firstItem="XoM-Qr-MJv" firstAttribute="bottom" secondItem="fKc-gx-1ZT" secondAttribute="bottom" id="iZ6-rk-imI"/>
+                            <constraint firstItem="fKc-gx-1ZT" firstAttribute="top" secondItem="XoM-Qr-MJv" secondAttribute="top" id="xeD-kM-pqv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XoM-Qr-MJv"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="V7b-nR-qv0"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="DHU-6b-gCx" id="Itx-Mc-XCj"/>
                     </connections>
@@ -70,14 +62,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Employee Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deA-SJ-ZZE">
-                                <rect key="frame" x="10" y="39" width="355" height="36"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="26"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yj8-Dl-wk7">
-                                <rect key="frame" x="16" y="83" width="343" height="255"/>
+                                <rect key="frame" x="16" y="78" width="343" height="255"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-Ld-ze9">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="255"/>
@@ -222,15 +208,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="deA-SJ-ZZE" firstAttribute="top" secondItem="yan-2q-6rf" secondAttribute="top" constant="19" id="5Vo-bR-uFg"/>
+                            <constraint firstItem="yan-2q-6rf" firstAttribute="top" secondItem="yj8-Dl-wk7" secondAttribute="bottom" constant="-269" id="DT0-3f-8dh"/>
                             <constraint firstItem="yan-2q-6rf" firstAttribute="trailing" secondItem="yj8-Dl-wk7" secondAttribute="trailing" constant="16" id="GAF-9x-5Ov"/>
-                            <constraint firstItem="deA-SJ-ZZE" firstAttribute="leading" secondItem="yan-2q-6rf" secondAttribute="leading" constant="10" id="TLO-FT-X9N"/>
-                            <constraint firstItem="deA-SJ-ZZE" firstAttribute="centerX" secondItem="yan-2q-6rf" secondAttribute="centerX" id="ZdN-MB-ESF"/>
                             <constraint firstItem="yj8-Dl-wk7" firstAttribute="leading" secondItem="yan-2q-6rf" secondAttribute="leading" constant="16" id="ebp-ca-Sm1"/>
-                            <constraint firstItem="yj8-Dl-wk7" firstAttribute="top" secondItem="deA-SJ-ZZE" secondAttribute="bottom" constant="8" id="kl8-Rb-zPF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yan-2q-6rf"/>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="designation" destination="zcJ-eZ-0gE" id="x3c-gt-tb2"/>
                         <outlet property="email" destination="3Go-cb-oxC" id="f8r-hT-3P3"/>

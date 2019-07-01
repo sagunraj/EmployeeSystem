@@ -14,6 +14,8 @@ class StringConstants {
         "signUpAlertControllerMessage": "You have completed signing up. Now you can login!",
         "signUpAlertActionTitle": "Okay",
         "error": "Error",
-        "required": "Please fill up all fields."
+        "required": "Please fill up all fields.",
+        "employeeList": "Employee List",
+        "employeeDetails": "Employee Details"
     ]
 }
