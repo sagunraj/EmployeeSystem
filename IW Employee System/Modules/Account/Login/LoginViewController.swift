@@ -14,6 +14,8 @@ class LoginViewController: KeyboardAvoidingViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    private var user: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +34,32 @@ class LoginViewController: KeyboardAvoidingViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
         super.viewWillAppear(animated)
+    }
+    
+    private func loadUserDetailsFromAPI(){
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
+        guard let url = URL(string: "https://jsonblob.com/api/a01f2cd3-9c8d-11e9-8e75-a9fe9bdf45e7") else { return }
+        let task = session.dataTask(with: url) {
+            (data, response, error) in
+            guard let resData = data, response != nil, error == nil else { return }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            do {
+                let responseObj = try decoder.decode(UserResponse.self, from: resData)
+                self.user = responseObj.user
+                
+                UserDefaultsHelper.setUserDefaults(with: self.user!, forKey: Constants.UserDefaultKeys.userInfo)
+                
+                let queue = OperationQueue.main
+                queue.addOperation {
+                    self.loadAppFunctionalityStoryboard()
+                }
+            } catch {
+                print("Something went wrong.")
+            }
+        }
+        task.resume()
     }
     
     private func loadAppFunctionalityStoryboard(){
@@ -57,12 +85,12 @@ extension LoginViewController {
     
     @IBAction func onLoginTap(_ sender: UIButton) {
         let loginModel = LoginModel(email: emailTextField.text.unWrapped.trimmed , password: passwordTextField.text.unWrapped.trimmed)
+        
         if FormValidation.requiredValidation(loginModel.email) && FormValidation.requiredValidation(loginModel.password) {
             if FormValidation.emailValidation(loginModel.email) {
-                loadAppFunctionalityStoryboard()
+                loadUserDetailsFromAPI()
             }
-        }
-        else {
+        } else {
             showAlert(alertTitle: StringConstants.strings["error"]!, alertMessage: StringConstants.strings["required"]!, alertActionTitle: StringConstants.strings["signUpAlertActionTitle"]!, handler: { _ in })
         }
     

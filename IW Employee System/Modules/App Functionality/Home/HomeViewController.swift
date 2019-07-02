@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var user: UILabel!
     
     private var employees: [Employee] = []
     var activityIndicator: UIActivityIndicatorView!
@@ -19,10 +20,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setUpTableView()
         loadDataFromAPI()
+        
+        let userData = UserDefaultsHelper.getUserDefaults(for: User.self, forKey: Constants.UserDefaultKeys.userInfo)
+        user.text = "Hello \(userData?.firstName ?? "user")!"
     }
     
-  
-    
+
     private func loadDataFromAPI(){
         activityIndicator.startAnimating()
 
