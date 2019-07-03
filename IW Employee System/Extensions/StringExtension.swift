@@ -13,6 +13,8 @@ extension String {
     var trimmed: String {
         return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+    
+    var intValue: Int { return Int(self) ?? 0 }
 }
 
 extension Optional where Wrapped == String {

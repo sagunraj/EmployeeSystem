@@ -14,11 +14,13 @@ struct EmployeeListResponse: Codable {
 }
 
 struct Employee: Codable {
+    var id: Int
     var name: String
     var emailAddress: String
     var primaryNumber: String
     var designation: String
     var team: Team
+    
 }
 
 struct Team: Codable {
