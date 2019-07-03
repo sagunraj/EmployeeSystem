@@ -8,13 +8,10 @@
 
 import Foundation
 
-extension Int {
+extension Optional where Wrapped == Int {
     
-    var likes: String {
-        if self % 1000 > 0 {
-            return "\((self / 1000)) likes"
-        } else {
-            return "\(self) likes"
-        }
+    var unWrapped: Int {
+        return self ?? 0
     }
+ 
 }

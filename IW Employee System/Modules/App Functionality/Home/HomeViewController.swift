@@ -75,7 +75,40 @@ class HomeViewController: UIViewController {
 
 
 // MARK: - <#UITableViewDataSource, UITableViewDelegate#>
-extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate, EmployeeProtocol, EmployeeCellProtocol {
+    
+    func onEmployeeDelete(cell: EmployeeTableViewCell) {
+//        let filteredEmployee = employees.filter {
+//           (item) in
+//                item.id != cell.employee?.id
+//        }
+//        employees = filteredEmployee
+//        OR
+//        if let index = employees.firstIndex(where: { (employee) -> Bool in
+//            return employee.id == (cell.employee?.id ?? -1)
+//        }) {
+//            employees.remove(at: index)
+//        }
+//        tableView.reloadData()
+
+        showAlert(alertTitle: "Are you sure you want to delete?",
+                  withMessage: "This action cannot be undone.",
+                  okHandler: { () in self.deleteAction(cell: cell) })
+
+    }
+    
+    private func deleteAction(cell: EmployeeTableViewCell){
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        employees.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func didUpdateEmployee(employee: Employee, at row: Int) {
+        employees[row] = employee
+        
+        let indexPath = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return employees.count
@@ -85,17 +118,64 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeTableViewCell", for: indexPath) as? EmployeeTableViewCell
         cell?.employee = employees[indexPath.row]
+        cell?.delegate = self
         return cell!
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let detailsVC = DetailsViewController.getInstance()
-        detailsVC?.employee = employees[indexPath.row]
-        
-        self.navigationController?.pushViewController(detailsVC!, animated: true)
+        let detailsVC = DetailsViewController.getInstance(with: employees[indexPath.row], at: indexPath.row)
+        detailsVC?.delegate = self
+        navigationController?.pushViewController(detailsVC!, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        guard let cell = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell else { return }
+//        showAlert(alertTitle: "Are you sure you want to delete?",
+//                  withMessage: "This action cannot be undone.",
+//                  okHandler: { () in self.deleteAction(cell: cell) })
+//    }
+//
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        return .delete
+//    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let details = UITableViewRowAction(style: .normal, title: "Details", handler: {(action, index) in
+            let detailsVC = DetailsViewController.getInstance(with: self.employees[indexPath.row], at: indexPath.row)
+            detailsVC?.delegate = self
+            self.navigationController?.pushViewController(detailsVC!, animated: true)
+        })
+        details.backgroundColor = .orange
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: { (action, index) in
+            guard let cell = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell else { return }
+            self.showAlert(alertTitle: "Are you sure you want to delete?",
+                      withMessage: "This action cannot be undone.",
+                      okHandler: { () in self.deleteAction(cell: cell) })
+        })
+        delete.backgroundColor = .red
+        
+        return [details, delete]
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let details = UIContextualAction(style: .normal, title: "Details", handler: {(action, index, arg)  in
+            let detailsVC = DetailsViewController.getInstance(with: self.employees[indexPath.row], at: indexPath.row)
+            detailsVC?.delegate = self
+            self.navigationController?.pushViewController(detailsVC!, animated: true)
+        })
+        details.backgroundColor = .orange
+        
+        return UISwipeActionsConfiguration(actions: [details])
+    }
+    
+    
 }
 
 

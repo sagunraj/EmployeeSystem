@@ -8,22 +8,34 @@
 
 import UIKit
 
+protocol EmployeeProtocol: class {
+    func didUpdateEmployee(employee: Employee, at row: Int)
+    func didAddEmployee(employee: Employee)
+}
+
+extension EmployeeProtocol { // for making the functions optional
+    func didUpdateEmployee(employee: Employee, at row: Int) {}
+    func didAddEmployee(employee: Employee) {}
+}
+
 class DetailsViewController: UIViewController {
     
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var email: UILabel!
-    @IBOutlet weak var phone: UILabel!
-    @IBOutlet weak var designation: UILabel!
-    @IBOutlet weak var team: UILabel!
-    @IBOutlet weak var size: UILabel!
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var phone: UITextField!
+    @IBOutlet weak var designation: UITextField!
+    @IBOutlet weak var team: UITextField!
+    @IBOutlet weak var size: UITextField!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var employee: Employee?
-    var activityIndicator: UIActivityIndicatorView!
+    private var employee: Employee?
+    private var activityIndicator: UIActivityIndicatorView!
     
     private let numberOfItemsInColumn = 3
     private var projects: [Project] = []
+    private var employeeRow: Int = -1
+    weak var delegate: EmployeeProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,9 +94,13 @@ class DetailsViewController: UIViewController {
         task.resume()
     }
     
-    static func getInstance() -> DetailsViewController? {
-        return UIStoryboard(name: "HomeStoryboard", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController
+    static func getInstance(with employee: Employee, at row: Int ) -> DetailsViewController? {
+        let vc = UIStoryboard(name: "HomeStoryboard", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController
+        vc?.employee = employee
+        vc?.employeeRow = row
+        return vc
     }
+    
 }
 
 
@@ -105,6 +121,27 @@ extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectio
         let padding: CGFloat = 10
         let width = (collectionView.frame.size.width / CGFloat(numberOfItemsInColumn)) - (padding * (CGFloat(numberOfItemsInColumn) - 1))
         return CGSize(width: width, height: width)
+    }
+    
+}
+
+extension DetailsViewController {
+    
+    @IBAction func onTapSaveBtn(_ sender: Any) {
+        
+        let changedEmployeeData = Employee(id: (employee?.id).unWrapped,
+                                           name: name.text.unWrapped,
+                                            emailAddress: email.text.unWrapped,
+                                           primaryNumber: phone.text.unWrapped,
+                                           designation: designation.text.unWrapped,
+                                           team: Team(id: (employee?.team.id)!,
+                                                      name: team.text.unWrapped,
+                                                      avatar: (employee?.team.avatar).unWrapped,
+                                                      members: size.text.unWrapped.intValue)
+                                        )
+        
+        delegate?.didUpdateEmployee(employee: changedEmployeeData, at: employeeRow)
+        navigationController?.popViewController(animated: true)
     }
     
 }

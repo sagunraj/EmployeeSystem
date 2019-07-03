@@ -17,6 +17,7 @@ class StringConstants {
         "error": "Error",
         "required": "Please fill up all fields.",
         "employeeList": "Employee List",
-        "employeeDetails": "Employee Details"
+        "employeeDetails": "Employee Details",
+        "deleteTitle": "Are you sure?"
     ]
 }

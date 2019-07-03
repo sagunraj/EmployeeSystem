@@ -9,11 +9,18 @@
 
 import UIKit
 
+protocol EmployeeCellProtocol: class {
+    func onEmployeeDelete(cell: EmployeeTableViewCell)
+}
+
 class EmployeeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var avatar: UILabel!
+    @IBOutlet weak var deleteBtn: UIButton!
+    
+    weak var delegate: EmployeeCellProtocol?
     
     var employee: Employee? = nil {
         didSet {
@@ -24,6 +31,7 @@ class EmployeeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,4 +46,10 @@ class EmployeeTableViewCell: UITableViewCell {
         avatar.text = String(employee?.name.prefix(1) ?? "N/A")
     }
     
+}
+
+extension EmployeeTableViewCell {
+    @IBAction func onDeleteTap(_ sender: Any) {
+        delegate?.onEmployeeDelete(cell: self)
+    }
 }

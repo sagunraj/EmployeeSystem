@@ -23,18 +23,17 @@ extension UIViewController {
     
     func showAlert(alertTitle:String,
                    withMessage message: String,
-                   okTitle: String = "Ok", okHandler: @escaping () -> Void,
-                   cancelTitle: String = "Cancel", cancelHandler: @escaping () -> Void) {
+                   okTitle: String = "Yes", okHandler: @escaping () -> Void,
+                   cancelTitle: String = "Cancel") {
         
-        let alertController = UIAlertController(title: title,
+        let alertController = UIAlertController(title: alertTitle,
                                                 message: message,
                                                 preferredStyle: .alert)
         let okHandler = UIAlertAction(title: okTitle, style: .default) { (handler) in
             okHandler()
         }
         
-        let cancelAction = UIAlertAction(title: cancelTitle, style: .default) { (handler) in
-            cancelHandler()
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .default) { _ in return
         }
         
         alertController.addAction(okHandler)
