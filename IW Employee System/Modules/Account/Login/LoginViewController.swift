@@ -13,6 +13,7 @@ class LoginViewController: KeyboardAvoidingViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var loginBtn: UIButton!
     
     private var user: User?
     
@@ -26,6 +27,9 @@ class LoginViewController: KeyboardAvoidingViewController {
     private func setTextFields(){
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        
+        emailTextField.returnKeyType = UIReturnKeyType.next
+        passwordTextField.returnKeyType = UIReturnKeyType.go
         
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
@@ -62,7 +66,8 @@ class LoginViewController: KeyboardAvoidingViewController {
         task.resume()
     }
     
-    private func loadAppFunctionalityStoryboard(){
+    
+    private func loadAppFunctionalityStoryboard() {
         
         let appFunctionalityStoryboard = UIStoryboard(name: "AppFunctionalityStoryboard", bundle: nil)
         if let tabBarVC = appFunctionalityStoryboard.instantiateViewController(withIdentifier: "AppTabBarController") as? AppTabBarController {
@@ -73,6 +78,16 @@ class LoginViewController: KeyboardAvoidingViewController {
             window?.rootViewController = tabBarVC
             window?.makeKeyAndVisible()
         }
+    }
+    
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == passwordTextField {
+            self.onLoginTap(loginBtn)
+        }
+        else {
+            passwordTextField.becomeFirstResponder()
+        }
+        return false
     }
 }
 
@@ -95,5 +110,6 @@ extension LoginViewController {
         }
     
     }
+    
     
 }
