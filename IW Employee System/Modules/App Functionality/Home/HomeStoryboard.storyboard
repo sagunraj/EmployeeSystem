@@ -222,10 +222,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3y-lE-lpa">
-                                <rect key="frame" x="0.0" y="429" width="375" height="222"/>
+                                <rect key="frame" x="0.0" y="429" width="375" height="178"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3h9-sP-jAE">
-                                        <rect key="frame" x="8" y="0.0" width="359" height="222"/>
+                                        <rect key="frame" x="8" y="0.0" width="359" height="178"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="opz-Qg-vn0">
                                             <size key="itemSize" width="50" height="50"/>
@@ -271,7 +271,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yan-2q-6rf"/>
                     </view>
+                    <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="3h9-sP-jAE" id="Zbj-Rh-2mL"/>
                         <outlet property="designation" destination="Ueg-V4-3gW" id="CiM-JM-xXX"/>

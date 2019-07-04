@@ -89,6 +89,11 @@ class LoginViewController: KeyboardAvoidingViewController {
         }
         return false
     }
+    
+    static func getInstance() -> LoginViewController? {
+        let loginVC = UIStoryboard(name: "AccountStoryboard", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        return loginVC
+    }
 }
 
 extension LoginViewController {

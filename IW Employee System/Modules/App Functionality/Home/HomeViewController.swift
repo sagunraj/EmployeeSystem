@@ -18,10 +18,29 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
+        
         setUpTableView()
         loadDataFromAPI()
         setUserDetail()
         addNotificationObservers()
+    }
+    
+    @objc private func logout(){
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultKeys.userInfo)
+        UserDefaults.standard.synchronize()
+        
+        if let loginVC = LoginViewController.getInstance() {
+            let navController = UINavigationController(rootViewController: loginVC)
+            navController.setNavigationBarHidden(true, animated: true)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let window = appDelegate.window
+            showAlert(alertTitle: "Logged out!", alertMessage: "You've logged out of the app.", alertActionTitle: "Okay", handler: {_ in return})
+            window?.rootViewController = navController
+            window?.makeKeyAndVisible()
+        }
+    
     }
     
     private func setUserDetail() {
