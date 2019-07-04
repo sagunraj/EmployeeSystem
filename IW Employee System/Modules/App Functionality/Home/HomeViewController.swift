@@ -20,9 +20,35 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setUpTableView()
         loadDataFromAPI()
-        
+        setUserDetail()
+        addNotificationObservers()
+    }
+    
+    private func setUserDetail() {
         let userData = UserDefaultsHelper.getUserDefaults(for: User.self, forKey: Constants.UserDefaultKeys.userInfo)
         user.text = "Hello \(userData?.firstName ?? "user")!"
+    }
+    
+    private func addNotificationObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.didReceiveNotification(notification:)),
+                                               name: NSNotification.Name(rawValue: "updateEmployee"),
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    @objc func didReceiveNotification(notification: Notification) {
+        if notification.name == NSNotification.Name(rawValue: "updateEmployee") {
+            let userInfo = notification.userInfo
+            if let user = userInfo?["employeeDict"] as? Employee,
+                let row =  userInfo?["row"] as? Int {
+                didUpdateEmployee(employee: user, at: row)
+            }
+        }
     }
     
 
@@ -75,8 +101,9 @@ class HomeViewController: UIViewController {
 
 
 // MARK: - <#UITableViewDataSource, UITableViewDelegate#>
-extension HomeViewController: UITableViewDataSource, UITableViewDelegate, EmployeeProtocol, EmployeeCellProtocol {
-    
+//extension HomeViewController: UITableViewDataSource, UITableViewDelegate, EmployeeProtocol, EmployeeCellProtocol {
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate, EmployeeCellProtocol {
+
     func onEmployeeDelete(cell: EmployeeTableViewCell) {
 //        let filteredEmployee = employees.filter {
 //           (item) in
@@ -103,6 +130,13 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate, Employ
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
+//    func didUpdateEmployee(employee: Employee, at row: Int) { // for protocol and delegate method
+//        employees[row] = employee
+//
+//        let indexPath = IndexPath(row: row, section: 0)
+//        tableView.reloadRows(at: [indexPath], with: .automatic)
+//    }
+    
     func didUpdateEmployee(employee: Employee, at row: Int) {
         employees[row] = employee
         
@@ -122,12 +156,16 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate, Employ
         return cell!
     }
     
+    private func openDetailsVC(forEmployeeAt indexPath: IndexPath) {
+        let detailsVC = DetailsViewController.getInstance(with: employees[indexPath.row], at: indexPath.row)
+        //        detailsVC?.delegate = self
+        navigationController?.pushViewController(detailsVC!, animated: true)
+    }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let detailsVC = DetailsViewController.getInstance(with: employees[indexPath.row], at: indexPath.row)
-        detailsVC?.delegate = self
-        navigationController?.pushViewController(detailsVC!, animated: true)
+        self.openDetailsVC(forEmployeeAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -147,9 +185,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate, Employ
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let details = UITableViewRowAction(style: .normal, title: "Details", handler: {(action, index) in
-            let detailsVC = DetailsViewController.getInstance(with: self.employees[indexPath.row], at: indexPath.row)
-            detailsVC?.delegate = self
-            self.navigationController?.pushViewController(detailsVC!, animated: true)
+           self.openDetailsVC(forEmployeeAt: indexPath)
         })
         details.backgroundColor = .orange
         
@@ -166,9 +202,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate, Employ
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let details = UIContextualAction(style: .normal, title: "Details", handler: {(action, index, arg)  in
-            let detailsVC = DetailsViewController.getInstance(with: self.employees[indexPath.row], at: indexPath.row)
-            detailsVC?.delegate = self
-            self.navigationController?.pushViewController(detailsVC!, animated: true)
+          self.openDetailsVC(forEmployeeAt: indexPath)
         })
         details.backgroundColor = .orange
         

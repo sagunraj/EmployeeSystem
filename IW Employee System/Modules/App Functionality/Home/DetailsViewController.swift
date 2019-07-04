@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol EmployeeProtocol: class {
-    func didUpdateEmployee(employee: Employee, at row: Int)
-    func didAddEmployee(employee: Employee)
-}
+//protocol EmployeeProtocol: class {
+//    func didUpdateEmployee(employee: Employee, at row: Int)
+//    func didAddEmployee(employee: Employee)
+//}
 
-extension EmployeeProtocol { // for making the functions optional
-    func didUpdateEmployee(employee: Employee, at row: Int) {}
-    func didAddEmployee(employee: Employee) {}
-}
+//extension EmployeeProtocol { // for making the functions optional
+//    func didUpdateEmployee(employee: Employee, at row: Int) {}
+//    func didAddEmployee(employee: Employee) {}
+//}
 
 class DetailsViewController: UIViewController {
     
@@ -35,7 +35,7 @@ class DetailsViewController: UIViewController {
     private let numberOfItemsInColumn = 3
     private var projects: [Project] = []
     private var employeeRow: Int = -1
-    weak var delegate: EmployeeProtocol?
+//    weak var delegate: EmployeeProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,7 +128,6 @@ extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectio
 extension DetailsViewController {
     
     @IBAction func onTapSaveBtn(_ sender: Any) {
-        
         let changedEmployeeData = Employee(id: (employee?.id).unWrapped,
                                            name: name.text.unWrapped,
                                             emailAddress: email.text.unWrapped,
@@ -140,7 +139,13 @@ extension DetailsViewController {
                                                       members: size.text.unWrapped.intValue)
                                         )
         
-        delegate?.didUpdateEmployee(employee: changedEmployeeData, at: employeeRow)
+        let employeeDict = ["employeeDict": changedEmployeeData,
+                            "row" : employeeRow ] as [String : Any]
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateEmployee"),
+                                        object: nil,
+                                        userInfo: employeeDict)
+//        delegate?.didUpdateEmployee(employee: changedEmployeeData, at: employeeRow)
         navigationController?.popViewController(animated: true)
     }
     
