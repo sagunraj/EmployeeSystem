@@ -28,8 +28,8 @@ class LoginViewController: KeyboardAvoidingViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         
-        emailTextField.returnKeyType = UIReturnKeyType.next
-        passwordTextField.returnKeyType = UIReturnKeyType.go
+        emailTextField.returnKeyType = UIReturnKeyType.next // Next button appears in place of Done in keyboard
+        passwordTextField.returnKeyType = UIReturnKeyType.go // Go button appears in place of Done in keyboard
         
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
