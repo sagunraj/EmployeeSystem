@@ -26,6 +26,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var designation: UITextField!
     @IBOutlet weak var team: UITextField!
     @IBOutlet weak var size: UITextField!
+    @IBOutlet weak var dob: UITextField!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -37,6 +38,7 @@ class DetailsViewController: UIViewController {
     private var employeeRow: Int = -1
     
     private var pickerView: UIPickerView?
+    private var datePicker: UIDatePicker?
     
     var currentRow: Int = 0
     var activeTextField: UITextField!
@@ -54,6 +56,7 @@ class DetailsViewController: UIViewController {
         
         designation.delegate = self
         team.delegate = self
+        dob.delegate = self
         
         activityIndicator = UIActivityIndicatorView(style: .gray)
 //        activityIndicator.center = CGPoint(x: collectionView.frame.midX, y: collectionView.frame.origin.y + collectionView.bounds.midY) // with respect to the whole view
@@ -81,6 +84,11 @@ class DetailsViewController: UIViewController {
         
         team.inputAccessoryView = toolbar
         team.inputView = pickerView
+        
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = UIDatePicker.Mode.date
+        dob.inputAccessoryView = toolbar
+        dob.inputView = datePicker
     }
     
     @objc func pickerDoneTapped(){
@@ -89,6 +97,12 @@ class DetailsViewController: UIViewController {
         }
         else if team.isFirstResponder {
             team.text = teamItems[currentRow]
+        }
+        else if dob.isFirstResponder, let newDate = datePicker?.date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let selectedDate = dateFormatter.string(from: newDate)
+            dob.text = selectedDate
         }
         self.view.endEditing(true)
     }
@@ -107,6 +121,7 @@ class DetailsViewController: UIViewController {
         designation.text = employee?.designation != "" ? employee?.designation : "N/A"
         team.text = employee?.team.name
         size.text = String(employee?.team.members ?? 0)
+        dob.text = employee?.dob
         
         loadProjects()
     }
@@ -210,7 +225,7 @@ extension DetailsViewController {
                                                       name: team.text.unWrapped,
                                                       avatar: (employee?.team.avatar).unWrapped,
                                                       members: size.text.unWrapped.intValue),
-                                           dob: "1990-01-01"
+                                           dob: self.dob.text
                                         )
         
         let employeeDict = ["employeeDict": changedEmployeeData,

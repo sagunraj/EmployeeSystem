@@ -73,10 +73,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yj8-Dl-wk7">
-                                <rect key="frame" x="16" y="78" width="343" height="255"/>
+                                <rect key="frame" x="16" y="33" width="343" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-Ld-ze9">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="255"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="300"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uo3-8F-CUq">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -201,6 +201,26 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TEV-9T-fiN">
+                                                <rect key="frame" x="0.0" y="270" width="343" height="30"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7qO-ww-bH0">
+                                                        <rect key="frame" x="91" y="0.0" width="244" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DOB:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obb-XV-yaz">
+                                                        <rect key="frame" x="0.0" y="3" width="44" height="24"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="uo3-8F-CUq" firstAttribute="width" secondItem="eBX-Ld-ze9" secondAttribute="width" id="juo-r8-CYQ"/>
@@ -277,6 +297,7 @@
                     <connections>
                         <outlet property="collectionView" destination="3h9-sP-jAE" id="Zbj-Rh-2mL"/>
                         <outlet property="designation" destination="Ueg-V4-3gW" id="CiM-JM-xXX"/>
+                        <outlet property="dob" destination="7qO-ww-bH0" id="11j-XF-Rup"/>
                         <outlet property="email" destination="F6h-Tw-jFs" id="3Bh-vT-6Wg"/>
                         <outlet property="name" destination="aVI-jK-Jhd" id="RZw-O9-813"/>
                         <outlet property="phone" destination="yih-IR-IRG" id="j77-XO-CgH"/>
