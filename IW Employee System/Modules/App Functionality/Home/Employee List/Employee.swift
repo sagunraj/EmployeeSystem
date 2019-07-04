@@ -20,7 +20,7 @@ struct Employee: Codable {
     var primaryNumber: String
     var designation: String
     var team: Team
-    
+    var dob: String?
 }
 
 struct Team: Codable {

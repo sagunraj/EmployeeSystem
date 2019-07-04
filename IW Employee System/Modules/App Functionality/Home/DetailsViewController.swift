@@ -35,12 +35,25 @@ class DetailsViewController: UIViewController {
     private let numberOfItemsInColumn = 3
     private var projects: [Project] = []
     private var employeeRow: Int = -1
+    
+    private var pickerView: UIPickerView?
+    
+    var currentRow: Int = 0
+    var activeTextField: UITextField!
+    
 //    weak var delegate: EmployeeProtocol?
+    
+    private let designationItems = ["Developer", "Engineering Manager", "Project Manager", "Trainee"]
+    private let teamItems = ["ASP.NET", "Mobile", "PHP", "Python"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = StringConstants.strings["employeeDetails"]
+        setupPickerView()
+        
+        designation.delegate = self
+        team.delegate = self
         
         activityIndicator = UIActivityIndicatorView(style: .gray)
 //        activityIndicator.center = CGPoint(x: collectionView.frame.midX, y: collectionView.frame.origin.y + collectionView.bounds.midY) // with respect to the whole view
@@ -49,6 +62,35 @@ class DetailsViewController: UIViewController {
         
         loadData()
         setupCollectionView()
+    }
+    
+    private func setupPickerView(){
+        pickerView = UIPickerView()
+        
+        pickerView?.dataSource = self
+        pickerView?.delegate = self
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(pickerDoneTapped))
+        toolbar.setItems([doneButton], animated: true)
+        
+        designation.inputAccessoryView = toolbar
+        designation.inputView = pickerView
+        
+        team.inputAccessoryView = toolbar
+        team.inputView = pickerView
+    }
+    
+    @objc func pickerDoneTapped(){
+        if designation.isFirstResponder {
+            designation.text = designationItems[currentRow]
+        }
+        else if team.isFirstResponder {
+            team.text = teamItems[currentRow]
+        }
+        self.view.endEditing(true)
     }
     
     private func setupCollectionView(){
@@ -105,7 +147,38 @@ class DetailsViewController: UIViewController {
 
 
 // MARK: - <#UICollectionViewDelegate, UICollectionViewDataSource#>
-extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        pickerView?.reloadAllComponents()
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if designation.isFirstResponder {
+            return designationItems.count
+        }
+        else if team.isFirstResponder {
+            return teamItems.count
+        }
+        return 0
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        currentRow = row
+        if designation.isFirstResponder {
+            return designationItems[row]
+        }
+        else if team.isFirstResponder {
+            return teamItems[row]
+        }
+        return " "
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return 10
         return projects.count
@@ -136,7 +209,8 @@ extension DetailsViewController {
                                            team: Team(id: (employee?.team.id)!,
                                                       name: team.text.unWrapped,
                                                       avatar: (employee?.team.avatar).unWrapped,
-                                                      members: size.text.unWrapped.intValue)
+                                                      members: size.text.unWrapped.intValue),
+                                           dob: "1990-01-01"
                                         )
         
         let employeeDict = ["employeeDict": changedEmployeeData,
