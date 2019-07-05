@@ -256,7 +256,7 @@ extension DetailsViewController {
         let alertController = UIAlertController(title: nil, message: "Upload image", preferredStyle: .actionSheet)
         
         let galleryUploadAction = UIAlertAction(title: "Choose from Camera Roll", style: .default, handler: { _ in return self.launchImagePicker() })
-        let cameraLaunchAction = UIAlertAction(title: "Launch Camera", style: .default, handler: {_ in return})
+        let cameraLaunchAction = UIAlertAction(title: "Launch Camera", style: .default, handler: {_ in return self.launchCamera()})
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in return})
         
         alertController.addAction(galleryUploadAction)
@@ -266,8 +266,14 @@ extension DetailsViewController {
         present(alertController, animated: true)
     }
     
+    private func launchCamera() {
+        imagePicker?.sourceType = .camera
+        imagePicker?.allowsEditing = true
+        present(imagePicker!, animated: true, completion: nil)
+    }
+    
     private func launchImagePicker() {
-        imagePicker?.allowsEditing = false
+        imagePicker?.allowsEditing = true
         imagePicker?.sourceType = .photoLibrary
         
         present(imagePicker!, animated: true, completion: nil)
@@ -279,7 +285,7 @@ extension DetailsViewController {
 // MARK: - <#UINavigationControllerDelegate, UIImagePickerControllerDelegate#>
 extension DetailsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[.originalImage] as? UIImage {
+        if let pickedImage = info[.editedImage] as? UIImage {
             imageView.contentMode = .scaleAspectFit
             imageView.image = pickedImage
         }
