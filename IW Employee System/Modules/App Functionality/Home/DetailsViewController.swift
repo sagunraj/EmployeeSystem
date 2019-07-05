@@ -27,6 +27,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var team: UITextField!
     @IBOutlet weak var size: UITextField!
     @IBOutlet weak var dob: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -39,6 +40,7 @@ class DetailsViewController: UIViewController {
     
     private var pickerView: UIPickerView?
     private var datePicker: UIDatePicker?
+    private var imagePicker: UIImagePickerController?
     
     var currentRow: Int = 0
     var activeTextField: UITextField!
@@ -50,6 +52,9 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imagePicker = UIImagePickerController()
+        imagePicker?.delegate = self
         
         navigationItem.title = StringConstants.strings["employeeDetails"]
         setupPickerView()
@@ -122,7 +127,12 @@ class DetailsViewController: UIViewController {
         team.text = employee?.team.name
         size.text = String(employee?.team.members ?? 0)
         dob.text = employee?.dob
-        
+        if let img = employee?.image {
+            imageView.image = UIImage(data: img)
+        }
+//        if let img = Data(base64Encoded: employee?.image.unWrapped ?? "", options: .ignoreUnknownCharacters) { // FOR BASE64
+//            imageView.image = UIImage(data: img)
+//        }
         loadProjects()
     }
     
@@ -216,6 +226,9 @@ extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectio
 extension DetailsViewController {
     
     @IBAction func onTapSaveBtn(_ sender: Any) {
+        let imageData = imageView.image?.pngData()
+//        let imageData = imageView.image?.pngData()?.base64EncodedString() // FOR BASE64
+        
         let changedEmployeeData = Employee(id: (employee?.id).unWrapped,
                                            name: name.text.unWrapped,
                                             emailAddress: email.text.unWrapped,
@@ -225,7 +238,8 @@ extension DetailsViewController {
                                                       name: team.text.unWrapped,
                                                       avatar: (employee?.team.avatar).unWrapped,
                                                       members: size.text.unWrapped.intValue),
-                                           dob: self.dob.text
+                                           dob: self.dob.text,
+                                           image: imageData
                                         )
         
         let employeeDict = ["employeeDict": changedEmployeeData,
@@ -238,4 +252,38 @@ extension DetailsViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func onTapChangeImage(_ sender: Any) {
+        let alertController = UIAlertController(title: nil, message: "Upload image", preferredStyle: .actionSheet)
+        
+        let galleryUploadAction = UIAlertAction(title: "Choose from Camera Roll", style: .default, handler: { _ in return self.launchImagePicker() })
+        let cameraLaunchAction = UIAlertAction(title: "Launch Camera", style: .default, handler: {_ in return})
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in return})
+        
+        alertController.addAction(galleryUploadAction)
+        alertController.addAction(cameraLaunchAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    private func launchImagePicker() {
+        imagePicker?.allowsEditing = false
+        imagePicker?.sourceType = .photoLibrary
+        
+        present(imagePicker!, animated: true, completion: nil)
+    }
+    
+}
+
+
+// MARK: - <#UINavigationControllerDelegate, UIImagePickerControllerDelegate#>
+extension DetailsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[.originalImage] as? UIImage {
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = pickedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
 }

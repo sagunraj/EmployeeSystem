@@ -6,7 +6,7 @@
 //  Copyright © 2019 Sagun Raj Lage. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct EmployeeListResponse: Codable {
     var message: String
@@ -21,6 +21,8 @@ struct Employee: Codable {
     var designation: String
     var team: Team
     var dob: String?
+    var image: Data?
+//    var image: String? // FOR BASE64
 }
 
 struct Team: Codable {
