@@ -18,7 +18,6 @@ class EmployeeTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var avatar: UILabel!
-    @IBOutlet weak var deleteBtn: UIButton!
     
     weak var delegate: EmployeeCellProtocol?
     

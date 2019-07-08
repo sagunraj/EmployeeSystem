@@ -53,9 +53,6 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker = UIImagePickerController()
-        imagePicker?.delegate = self
-        
         navigationItem.title = StringConstants.strings["employeeDetails"]
         setupPickerView()
         
@@ -183,13 +180,10 @@ extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectio
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if designation.isFirstResponder {
-            return designationItems.count
+        if designation.isFirstResponder || team.isFirstResponder {
+            return designation.isFirstResponder ? designationItems.count : teamItems.count
         }
-        else if team.isFirstResponder {
-            return teamItems.count
-        }
-        return 0
+        return  0
     }
     
     
@@ -253,10 +247,24 @@ extension DetailsViewController {
     }
     
     @IBAction func onTapChangeImage(_ sender: Any) {
+        
+        imagePicker = UIImagePickerController()
+        imagePicker?.delegate = self
+        
         let alertController = UIAlertController(title: nil, message: "Upload image", preferredStyle: .actionSheet)
         
-        let galleryUploadAction = UIAlertAction(title: "Choose from Camera Roll", style: .default, handler: { _ in return self.launchImagePicker() })
-        let cameraLaunchAction = UIAlertAction(title: "Launch Camera", style: .default, handler: {_ in return self.launchCamera()})
+        let galleryUploadAction = UIAlertAction(title: "Choose from Camera Roll",
+                                                style: .default,
+                                                handler: { _ in return
+                                                    self.pickImage(using: .photoLibrary)
+                                                })
+        
+        let cameraLaunchAction = UIAlertAction(title: "Launch Camera",
+                                               style: .default,
+                                               handler: {_ in
+                                                return self.pickImage(using: .camera)
+                                                })
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in return})
         
         alertController.addAction(galleryUploadAction)
@@ -266,30 +274,25 @@ extension DetailsViewController {
         present(alertController, animated: true)
     }
     
-    private func launchCamera() {
-        imagePicker?.sourceType = .camera
+    private func pickImage(using source:  UIImagePickerController.SourceType) {
+        imagePicker?.sourceType = source
         imagePicker?.allowsEditing = true
         present(imagePicker!, animated: true, completion: nil)
     }
     
-    private func launchImagePicker() {
-        imagePicker?.allowsEditing = true
-        imagePicker?.sourceType = .photoLibrary
-        
-        present(imagePicker!, animated: true, completion: nil)
-    }
     
 }
 
 
 // MARK: - <#UINavigationControllerDelegate, UIImagePickerControllerDelegate#>
 extension DetailsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.editedImage] as? UIImage {
             imageView.contentMode = .scaleAspectFit
             imageView.image = pickedImage
         }
-        
         dismiss(animated: true, completion: nil)
     }
 }

@@ -23,6 +23,7 @@ struct Employee: Codable {
     var dob: String?
     var image: Data?
 //    var image: String? // FOR BASE64
+//    var address: Address
 }
 
 struct Team: Codable {
@@ -30,4 +31,10 @@ struct Team: Codable {
     var name: String
     var avatar: String
     var members: Int
+}
+
+struct Address: Codable {
+    var latitude: Double
+    var longitude: Double
+    var formattedAddress: String
 }
