@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var user: UILabel!
     
+    
     private var employees: [Employee] = []
     var activityIndicator: UIActivityIndicatorView!
     
@@ -45,7 +46,7 @@ class HomeViewController: UIViewController {
     
     private func setUserDetail() {
         let userData = UserDefaultsHelper.getUserDefaults(for: User.self, forKey: Constants.UserDefaultKeys.userInfo)
-        user.text = "Hello \(userData?.firstName ?? "user")!"
+        user.text = "Hello, \(userData?.firstName ?? "user")!"
     }
     
     private func addNotificationObservers() {
@@ -114,6 +115,12 @@ class HomeViewController: UIViewController {
         tableView?.dataSource = self
         tableView?.register(UINib(nibName: "EmployeeTableViewCell", bundle: nil), // register EmployeeTableViewCell nib to this UITableViewController
                            forCellReuseIdentifier: "EmployeeTableViewCell")
+    }
+    
+    @IBAction func onMapBtnTap(_ sender: Any) {
+        if let mapVC = MapViewController.getInstance(with: self.employees) as MapViewController? {
+        navigationController?.pushViewController(mapVC, animated: true)
+        }
     }
     
 }

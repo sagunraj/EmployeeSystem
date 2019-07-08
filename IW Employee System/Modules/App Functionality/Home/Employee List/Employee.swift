@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 struct EmployeeListResponse: Codable {
     var message: String
@@ -23,7 +24,7 @@ struct Employee: Codable {
     var dob: String?
     var image: Data?
 //    var image: String? // FOR BASE64
-//    var address: Address
+    var address: Address?
 }
 
 struct Team: Codable {
@@ -38,3 +39,16 @@ struct Address: Codable {
     var longitude: Double
     var formattedAddress: String
 }
+
+
+//class Location: NSObject, MKAnnotation {
+//    let coordinate: CLLocationCoordinate2D
+//    let title: String?
+//    let subtitle: String?
+//
+//    init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?) {
+//        self.coordinate = coordinate
+//        self.title = title
+//        self.subtitle = subtitle
+//    }
+//}

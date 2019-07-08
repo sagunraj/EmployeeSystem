@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA0C144D22D302EB001394F0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C144C22D302EB001394F0 /* MapViewController.swift */; };
 		BA1B36F422CB4B0900593C34 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B36F322CB4B0900593C34 /* User.swift */; };
 		BA1B36F622CB632100593C34 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B36F522CB632100593C34 /* UserDefaultsHelper.swift */; };
 		BA1B36F822CB70D800593C34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B36F722CB70D800593C34 /* Constants.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA0C144C22D302EB001394F0 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		BA1B36F322CB4B0900593C34 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA1B36F522CB632100593C34 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		BA1B36F722CB70D800593C34 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				BA63445822C485CC0024CB25 /* HomeViewController.swift */,
 				BA63445E22C48A190024CB25 /* HomeStoryboard.storyboard */,
 				BA63446222C499C50024CB25 /* DetailsViewController.swift */,
+				BA0C144C22D302EB001394F0 /* MapViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				BA63445B22C488040024CB25 /* SettingsViewController.swift in Sources */,
 				BA74AF0322C381320038DCEF /* SignUpModel.swift in Sources */,
 				BA2AE1BB22C5DB71008A70E2 /* Employee.swift in Sources */,
+				BA0C144D22D302EB001394F0 /* MapViewController.swift in Sources */,
 				BA1B36F622CB632100593C34 /* UserDefaultsHelper.swift in Sources */,
 				BA74AEFF22C3780F0038DCEF /* FormValidation.swift in Sources */,
 				BA74AF0622C382AB0038DCEF /* StringExtension.swift in Sources */,

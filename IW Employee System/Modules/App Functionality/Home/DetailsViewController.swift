@@ -233,7 +233,8 @@ extension DetailsViewController {
                                                       avatar: (employee?.team.avatar).unWrapped,
                                                       members: size.text.unWrapped.intValue),
                                            dob: self.dob.text,
-                                           image: imageData
+                                           image: imageData,
+                                           address: nil
                                         )
         
         let employeeDict = ["employeeDict": changedEmployeeData,
