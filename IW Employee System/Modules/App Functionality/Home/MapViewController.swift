@@ -145,13 +145,6 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
-//        var emp = employeeArr.first {
-//            item in
-//            item.name == view.annotation?.title
-//        }
-//
-//        emp?.address?.latitude = view.annotation?.coordinate.latitude ?? 0
-//        emp?.address?.longitude = view.annotation?.coordinate.longitude ?? 0
         draggedLocation = CLLocationCoordinate2D(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
         selectedEmployeeName = (view.annotation?.title)!
     }

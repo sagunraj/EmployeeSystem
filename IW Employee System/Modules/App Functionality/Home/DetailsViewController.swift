@@ -196,12 +196,7 @@ class DetailsViewController: UIViewController {
             (placemarks, error) in
             var generatedAddress = ""
             if error == nil {
-                if let subLocality = placemarks?[0].subLocality, let locality = placemarks?[0].locality {
-                    generatedAddress = "\(subLocality), \(locality), \(placemarks?[0].country ?? "None")"
-                }
-                else {
-                    generatedAddress = "\(placemarks?[0].country.unWrapped ?? "None")"
-                }
+                generatedAddress = placemarks?.first.unWrapped.formattedAddress ?? ""
             } else {
                 print("Error while getting formatted address of given coordinates: \(latitude) \(longitude).")
                 generatedAddress = "No address generated."
@@ -280,7 +275,9 @@ extension DetailsViewController {
                                                           members: self.size.text.unWrapped.intValue),
                                                dob: self.dob.text,
                                                image: imageData,
-                                               address: Address(latitude: latitude, longitude: longitude, formattedAddress: formattedAddress)
+                                               address: Address(latitude: latitude,
+                                                                longitude: longitude,
+                                                                formattedAddress: formattedAddress)
             )
             
             let employeeDict = ["employeeDict": changedEmployeeData,
