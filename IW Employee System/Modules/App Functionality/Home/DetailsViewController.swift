@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 //protocol EmployeeProtocol: class {
 //    func didUpdateEmployee(employee: Employee, at row: Int)
@@ -28,6 +29,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var size: UITextField!
     @IBOutlet weak var dob: UITextField!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var address: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -45,7 +47,7 @@ class DetailsViewController: UIViewController {
     var currentRow: Int = 0
     var activeTextField: UITextField!
     
-//    weak var delegate: EmployeeProtocol?
+    //    weak var delegate: EmployeeProtocol?
     
     private let designationItems = ["Developer", "Engineering Manager", "Project Manager", "Trainee"]
     private let teamItems = ["ASP.NET", "Mobile", "PHP", "Python"]
@@ -54,6 +56,7 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = StringConstants.strings["employeeDetails"]
+        
         setupPickerView()
         
         designation.delegate = self
@@ -61,12 +64,33 @@ class DetailsViewController: UIViewController {
         dob.delegate = self
         
         activityIndicator = UIActivityIndicatorView(style: .gray)
-//        activityIndicator.center = CGPoint(x: collectionView.frame.midX, y: collectionView.frame.origin.y + collectionView.bounds.midY) // with respect to the whole view
+        //        activityIndicator.center = CGPoint(x: collectionView.frame.midX, y: collectionView.frame.origin.y + collectionView.bounds.midY) // with respect to the whole view
         activityIndicator.center = collectionView.center
         collectionView.addSubview(activityIndicator)
         
-        loadData()
+        addLocationBarButton()
+        
+        loadProjects()
         setupCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+    }
+    
+    private func addLocationBarButton(){
+        let locationBarButton = UIBarButtonItem(image: UIImage(named: "marker.png"), style: .plain, target: self, action: #selector(navigateToMapView))
+        navigationItem.rightBarButtonItem = locationBarButton
+    }
+    
+    @objc private func navigateToMapView(){
+        if let emp = employee {
+            if let mapVC = MapViewController.getInstance(with: [emp]) as MapViewController? {
+                mapVC.delegate = self
+                navigationController?.pushViewController(mapVC, animated: true)
+            }
+        }
     }
     
     private func setupPickerView(){
@@ -127,10 +151,10 @@ class DetailsViewController: UIViewController {
         if let img = employee?.image {
             imageView.image = UIImage(data: img)
         }
-//        if let img = Data(base64Encoded: employee?.image.unWrapped ?? "", options: .ignoreUnknownCharacters) { // FOR BASE64
-//            imageView.image = UIImage(data: img)
-//        }
-        loadProjects()
+        address.text = employee?.address?.formattedAddress
+        //        if let img = Data(base64Encoded: employee?.image.unWrapped ?? "", options: .ignoreUnknownCharacters) { // FOR BASE64
+        //            imageView.image = UIImage(data: img)
+        //        }
     }
     
     private func loadProjects(){
@@ -163,6 +187,27 @@ class DetailsViewController: UIViewController {
         vc?.employee = employee
         vc?.employeeRow = row
         return vc
+    }
+    
+    private func formattedAddress(latitude: Double, longitude: Double, onCompletion: @escaping ((String) -> Void)) {
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude), completionHandler: {
+            (placemarks, error) in
+            var generatedAddress = ""
+            if error == nil {
+                if let subLocality = placemarks?[0].subLocality, let locality = placemarks?[0].locality {
+                    generatedAddress = "\(subLocality), \(locality), \(placemarks?[0].country ?? "None")"
+                }
+                else {
+                    generatedAddress = "\(placemarks?[0].country.unWrapped ?? "None")"
+                }
+            } else {
+                print("Error while getting formatted address of given coordinates: \(latitude) \(longitude).")
+                generatedAddress = "No address generated."
+            }
+            onCompletion(generatedAddress)
+        })
     }
     
 }
@@ -199,7 +244,7 @@ extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 10
+        //        return 10
         return projects.count
     }
     
@@ -221,30 +266,35 @@ extension DetailsViewController {
     
     @IBAction func onTapSaveBtn(_ sender: Any) {
         let imageData = imageView.image?.pngData()
-//        let imageData = imageView.image?.pngData()?.base64EncodedString() // FOR BASE64
+        //        let imageData = imageView.image?.pngData()?.base64EncodedString() // FOR BASE64
         
-        let changedEmployeeData = Employee(id: (employee?.id).unWrapped,
-                                           name: name.text.unWrapped,
-                                            emailAddress: email.text.unWrapped,
-                                           primaryNumber: phone.text.unWrapped,
-                                           designation: designation.text.unWrapped,
-                                           team: Team(id: (employee?.team.id)!,
-                                                      name: team.text.unWrapped,
-                                                      avatar: (employee?.team.avatar).unWrapped,
-                                                      members: size.text.unWrapped.intValue),
-                                           dob: self.dob.text,
-                                           image: imageData,
-                                           address: nil
-                                        )
+        if let latitude = employee?.address?.latitude, let longitude = employee?.address?.longitude, let formattedAddress = employee?.address?.formattedAddress {
+            let changedEmployeeData = Employee(id: (self.employee?.id).unWrapped,
+                                               name: self.name.text.unWrapped,
+                                               emailAddress: self.email.text.unWrapped,
+                                               primaryNumber: self.phone.text.unWrapped,
+                                               designation: self.designation.text.unWrapped,
+                                               team: Team(id: (self.employee?.team.id)!,
+                                                          name: self.team.text.unWrapped,
+                                                          avatar: (self.employee?.team.avatar).unWrapped,
+                                                          members: self.size.text.unWrapped.intValue),
+                                               dob: self.dob.text,
+                                               image: imageData,
+                                               address: Address(latitude: latitude, longitude: longitude, formattedAddress: formattedAddress)
+            )
+            
+            let employeeDict = ["employeeDict": changedEmployeeData,
+                                "row" : self.employeeRow ] as [String : Any]
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateEmployee"),
+                                            object: nil,
+                                            userInfo: employeeDict)
+            
+            self.navigationController?.popViewController(animated: true)
+            
+        }
         
-        let employeeDict = ["employeeDict": changedEmployeeData,
-                            "row" : employeeRow ] as [String : Any]
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateEmployee"),
-                                        object: nil,
-                                        userInfo: employeeDict)
-//        delegate?.didUpdateEmployee(employee: changedEmployeeData, at: employeeRow)
-        navigationController?.popViewController(animated: true)
+        //        delegate?.didUpdateEmployee(employee: changedEmployeeData, at: employeeRow)
     }
     
     @IBAction func onTapChangeImage(_ sender: Any) {
@@ -258,13 +308,13 @@ extension DetailsViewController {
                                                 style: .default,
                                                 handler: { _ in return
                                                     self.pickImage(using: .photoLibrary)
-                                                })
+        })
         
         let cameraLaunchAction = UIAlertAction(title: "Launch Camera",
                                                style: .default,
                                                handler: {_ in
                                                 return self.pickImage(using: .camera)
-                                                })
+        })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in return})
         
@@ -296,4 +346,19 @@ extension DetailsViewController: UINavigationControllerDelegate, UIImagePickerCo
         }
         dismiss(animated: true, completion: nil)
     }
+}
+
+
+// MARK: - <#MapOperationProtocol#>
+extension DetailsViewController: MapOperationProtocol {
+    
+    func updateEmployeeAddress(coordinates: CLLocationCoordinate2D) {
+        self.employee?.address?.latitude = coordinates.latitude
+        self.employee?.address?.longitude = coordinates.longitude
+        formattedAddress(latitude: coordinates.latitude, longitude: coordinates.longitude) { (address) in
+            self.employee?.address?.formattedAddress = address
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
 }

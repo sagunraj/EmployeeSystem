@@ -15,29 +15,52 @@ class CustomAnnotation: MKPointAnnotation {
 
 }
 
+protocol MapOperationProtocol: class {
+    
+    func updateEmployeeAddress(coordinates: CLLocationCoordinate2D)
+    
+}
+
 class MapViewController: UIViewController {
+    
     @IBOutlet weak var mapView: MKMapView!
+    
     var activityIndicator: UIActivityIndicatorView!
+    
     var locationManager: CLLocationManager?
+    var draggedLocation: CLLocationCoordinate2D?
+    
     var employeeArr: [Employee] = []
-    @IBOutlet weak var updateBtn: UIButton!
+    var selectedEmployeeName: String?
+    
+    weak var delegate: MapOperationProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        configureMapView()
+        navigationItem.title = "Employee Address"
+        configureMapView(with: CLLocationCoordinate2D(latitude: 27.7107, longitude: 85.3290))
         mapView.delegate = self
         showActivityIndicator()
         showCurrentUserLocation()
         displayUpdateButton()
     }
     
+    @objc private func updateEmployeeLocation(){
+        delegate?.updateEmployeeAddress(coordinates: draggedLocation ?? CLLocationCoordinate2D(latitude: 27.7107, longitude: 85.3290))
+    }
+    
     private func displayUpdateButton(){
-        if employeeArr.count <= 1 {
-            updateBtn.isHidden = false
+        if employeeArr.count == 1 {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(updateEmployeeLocation))
+            centerEmployeeLocation()
         }
-        else {
-            updateBtn.isHidden = true
+    }
+    
+    private func centerEmployeeLocation(){
+        if let latitude = employeeArr[0].address?.latitude, let longitude = employeeArr[0].address?.longitude {
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        mapView.setCenter(coordinate, animated: true)
         }
     }
     
@@ -58,10 +81,9 @@ class MapViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
-    private func configureMapView(){
-        let initialLocation = CLLocationCoordinate2D(latitude: 27.7107, longitude: 85.3500)
+    private func configureMapView(with center: CLLocationCoordinate2D){
         let regionRadius: CLLocationDistance = 10000
-        let coordinateRegion = MKCoordinateRegion(center: initialLocation, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        let coordinateRegion = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
         passEmployeeArrayToMapView()
     }
@@ -87,6 +109,10 @@ class MapViewController: UIViewController {
         vc?.employeeArr = employees
         return vc
     }
+    
+    private func refreshMap() {
+        configureMapView(with: mapView.region.center)
+    }
    
 }
 
@@ -105,19 +131,35 @@ extension MapViewController: MKMapViewDelegate {
         if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
             dequeuedView.annotation = annotation
             view = dequeuedView
+            view.animatesWhenAdded = true
         } else {
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.canShowCallout = true
+            if mapView.annotations.count == 1 {
+                view.isDraggable = true
+            }
+            view.animatesWhenAdded = true
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         return view
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
+//        var emp = employeeArr.first {
+//            item in
+//            item.name == view.annotation?.title
+//        }
+//
+//        emp?.address?.latitude = view.annotation?.coordinate.latitude ?? 0
+//        emp?.address?.longitude = view.annotation?.coordinate.longitude ?? 0
+        draggedLocation = CLLocationCoordinate2D(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
+        selectedEmployeeName = (view.annotation?.title)!
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let annotation = view.annotation as? CustomAnnotation,
         let id = annotation.id else { return }
         let employee = employeeArr[id]
-        
         let detailsVC = DetailsViewController.getInstance(with: employee, at: id)
         navigationController?.pushViewController(detailsVC!, animated: true)
     }
@@ -127,7 +169,7 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapViewDidFailLoadingMap(_ mapView: MKMapView, withError error: Error) {
-        showAlert(alertTitle: "Failed to load map", withMessage: "Please check your connectivity and retry.", okTitle: "Retry", okHandler: {self.viewDidLoad()}, cancelTitle: "Cancel")
+        showAlert(alertTitle: "Failed to load map", alertMessage: "Please check your connectivity and retry.", alertActionTitle: "Retry", handler: { _ in self.refreshMap()})
     }
     
 }
