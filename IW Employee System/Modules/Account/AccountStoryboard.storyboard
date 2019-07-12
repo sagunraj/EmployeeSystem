@@ -86,6 +86,9 @@
                                                         <state key="normal" title="Login with Google">
                                                             <color key="titleColor" red="0.89361375570000001" green="0.65030616519999995" blue="0.27046275139999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="onLoginWithGoogle:" destination="wRm-ev-4H6" eventType="touchUpInside" id="gFA-2g-JAz"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -157,6 +160,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="2w1-rd-bkc" id="AM9-YS-4tB"/>
+                        <outlet property="googleSignInBtn" destination="vUH-a6-ft7" id="hUB-W2-jT1"/>
                         <outlet property="loginBtn" destination="z6T-PL-v6d" id="xvJ-am-n60"/>
                         <outlet property="passwordTextField" destination="Ihp-oQ-l4r" id="tYi-u2-Sti"/>
                         <outlet property="scrollView" destination="fjD-II-Mkk" id="aOS-uL-V6K"/>

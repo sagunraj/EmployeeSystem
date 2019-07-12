@@ -1,0 +1,6 @@
+framework module Pods_IW_Employee_System {
+  umbrella header "Pods-IW Employee System-umbrella.h"
+
+  export *
+  module * { export * }
+}

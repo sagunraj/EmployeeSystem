@@ -22,4 +22,5 @@ struct User: Codable {
     var emailAddress: String
     var designation: String
     var profilePic: String
+    var googleId: String?
 }

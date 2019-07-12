@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class LoginViewController: KeyboardAvoidingViewController {
         
@@ -14,11 +15,16 @@ class LoginViewController: KeyboardAvoidingViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var googleSignInBtn: GIDSignInButton!
     
     private var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance()?.uiDelegate = self
+        googleSignInBtn.style = .wide
+        
         
         kaScrollView = scrollView
         setTextFields()
@@ -116,5 +122,15 @@ extension LoginViewController {
     
     }
     
+    @IBAction func onLoginWithGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.signOut()
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+}
+
+
+// MARK: - <#GIDSignInDelegate#>
+extension LoginViewController: GIDSignInUIDelegate {
     
 }
