@@ -15,6 +15,7 @@ struct EmployeeListResponse: Codable {
 }
 
 struct Employee: Codable {
+    
     var id: Int
     var name: String
     var emailAddress: String
@@ -25,6 +26,18 @@ struct Employee: Codable {
     var image: Data?
 //    var image: String? // FOR BASE64
     var address: Address?
+    
+    init(id: Int, name: String, emailAddress: String, primaryNumber: String, designation: String, team: Team, dob: String?) {
+        self.id = id
+        self.name = name
+        self.emailAddress = emailAddress
+        self.primaryNumber = primaryNumber
+        self.designation = designation
+        self.team = team
+        self.dob = dob
+        self.image = nil
+        self.address = nil
+    }
 }
 
 struct Team: Codable {

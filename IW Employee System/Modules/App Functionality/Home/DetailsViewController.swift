@@ -19,18 +19,11 @@ import MapKit
 //    func didAddEmployee(employee: Employee) {}
 //}
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: KeyboardAvoidingViewController {
     
-    @IBOutlet weak var name: UITextField!
-    @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var phone: UITextField!
-    @IBOutlet weak var designation: UITextField!
-    @IBOutlet weak var team: UITextField!
-    @IBOutlet weak var size: UITextField!
-    @IBOutlet weak var dob: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var employeeDetailsView: EmployeeDetailsView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var address: UILabel!
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var employee: Employee?
@@ -40,38 +33,31 @@ class DetailsViewController: UIViewController {
     private var projects: [Project] = []
     private var employeeRow: Int = -1
     
-    private var pickerView: UIPickerView?
-    private var datePicker: UIDatePicker?
     private var imagePicker: UIImagePickerController?
-    
-    var currentRow: Int = 0
-    var activeTextField: UITextField!
-    
-    //    weak var delegate: EmployeeProtocol?
-    
-    private let designationItems = ["Developer", "Engineering Manager", "Project Manager", "Trainee"]
-    private let teamItems = ["ASP.NET", "Mobile", "PHP", "Python"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = StringConstants.strings["employeeDetails"]
-        
-        setupPickerView()
-        
-        designation.delegate = self
-        team.delegate = self
-        dob.delegate = self
-        
-        activityIndicator = UIActivityIndicatorView(style: .gray)
-        //        activityIndicator.center = CGPoint(x: collectionView.frame.midX, y: collectionView.frame.origin.y + collectionView.bounds.midY) // with respect to the whole view
-        activityIndicator.center = collectionView.center
-        collectionView.addSubview(activityIndicator)
-        
-        addLocationBarButton()
-        
+        kaScrollView = scrollView
+        setUpNavBar()
+        makeActivityIndicator()
         loadProjects()
         setupCollectionView()
+        addDelegates()
+    }
+    
+    private func setUpNavBar() {
+        navigationItem.title = StringConstants.strings["employeeDetails"]
+        addLocationBarButton()
+    }
+    
+    private func addDelegates() {
+        employeeDetailsView.addDelegates(delegate: self)
+    }
+    
+    private func makeActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.center = collectionView.center
+        collectionView.addSubview(activityIndicator)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,46 +79,6 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    private func setupPickerView(){
-        pickerView = UIPickerView()
-        
-        pickerView?.dataSource = self
-        pickerView?.delegate = self
-        
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(pickerDoneTapped))
-        toolbar.setItems([doneButton], animated: true)
-        
-        designation.inputAccessoryView = toolbar
-        designation.inputView = pickerView
-        
-        team.inputAccessoryView = toolbar
-        team.inputView = pickerView
-        
-        datePicker = UIDatePicker()
-        datePicker?.datePickerMode = UIDatePicker.Mode.date
-        dob.inputAccessoryView = toolbar
-        dob.inputView = datePicker
-    }
-    
-    @objc func pickerDoneTapped(){
-        if designation.isFirstResponder {
-            designation.text = designationItems[currentRow]
-        }
-        else if team.isFirstResponder {
-            team.text = teamItems[currentRow]
-        }
-        else if dob.isFirstResponder, let newDate = datePicker?.date {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let selectedDate = dateFormatter.string(from: newDate)
-            dob.text = selectedDate
-        }
-        self.view.endEditing(true)
-    }
-    
     private func setupCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -141,20 +87,10 @@ class DetailsViewController: UIViewController {
     }
     
     private func loadData(){
-        name.text = employee?.name
-        email.text = employee?.emailAddress
-        phone.text = employee?.primaryNumber
-        designation.text = employee?.designation != "" ? employee?.designation : "N/A"
-        team.text = employee?.team.name
-        size.text = String(employee?.team.members ?? 0)
-        dob.text = employee?.dob
+        employeeDetailsView.employee = employee
         if let img = employee?.image {
             imageView.image = UIImage(data: img)
         }
-        address.text = employee?.address?.formattedAddress
-        //        if let img = Data(base64Encoded: employee?.image.unWrapped ?? "", options: .ignoreUnknownCharacters) { // FOR BASE64
-        //            imageView.image = UIImage(data: img)
-        //        }
     }
     
     private func loadProjects(){
@@ -205,42 +141,26 @@ class DetailsViewController: UIViewController {
         })
     }
     
+    override func doneButtonTapped(Sender: UIButton) {
+        employeeDetailsView.pickerDoneTapped()
+        super.doneButtonTapped(Sender: Sender)
+    }
+    
 }
 
-
-// MARK: - <#UICollectionViewDelegate, UICollectionViewDataSource#>
-extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+extension DetailsViewController {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        pickerView?.reloadAllComponents()
+        employeeDetailsView.reloadTextFieldInputView()
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if designation.isFirstResponder || team.isFirstResponder {
-            return designation.isFirstResponder ? designationItems.count : teamItems.count
-        }
-        return  0
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        currentRow = row
-        if designation.isFirstResponder {
-            return designationItems[row]
-        }
-        else if team.isFirstResponder {
-            return teamItems[row]
-        }
-        return " "
-    }
+}
+
+// MARK: - <#UICollectionViewDelegate, UICollectionViewDataSource#>
+extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //        return 10
-        return projects.count
+       return projects.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -260,25 +180,21 @@ extension DetailsViewController: UICollectionViewDelegateFlowLayout, UICollectio
 extension DetailsViewController {
     
     @IBAction func onTapSaveBtn(_ sender: Any) {
-        let imageData = imageView.image?.pngData()
-        //        let imageData = imageView.image?.pngData()?.base64EncodedString() // FOR BASE64
         
-        if let latitude = employee?.address?.latitude, let longitude = employee?.address?.longitude, let formattedAddress = employee?.address?.formattedAddress {
-            let changedEmployeeData = Employee(id: (self.employee?.id).unWrapped,
-                                               name: self.name.text.unWrapped,
-                                               emailAddress: self.email.text.unWrapped,
-                                               primaryNumber: self.phone.text.unWrapped,
-                                               designation: self.designation.text.unWrapped,
-                                               team: Team(id: (self.employee?.team.id)!,
-                                                          name: self.team.text.unWrapped,
-                                                          avatar: (self.employee?.team.avatar).unWrapped,
-                                                          members: self.size.text.unWrapped.intValue),
-                                               dob: self.dob.text,
-                                               image: imageData,
-                                               address: Address(latitude: latitude,
-                                                                longitude: longitude,
-                                                                formattedAddress: formattedAddress)
-            )
+        if let error = employeeDetailsView.getFormError() {
+            showAlert(alertMessage: error) { _ in
+            }
+            return 
+        }
+        
+        let imageData = imageView.image?.pngData()
+        
+        if let latitude = employee?.address?.latitude,
+            let longitude = employee?.address?.longitude,
+            let formattedAddress = employee?.address?.formattedAddress {
+            var changedEmployeeData = employeeDetailsView.getChangedEmployeeData()
+            changedEmployeeData.image = imageData
+            changedEmployeeData.address = Address(latitude: latitude, longitude: longitude, formattedAddress: formattedAddress)
             
             let employeeDict = ["employeeDict": changedEmployeeData,
                                 "row" : self.employeeRow ] as [String : Any]
@@ -287,11 +203,11 @@ extension DetailsViewController {
                                             object: nil,
                                             userInfo: employeeDict)
             
-            self.navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
             
         }
         
-        //        delegate?.didUpdateEmployee(employee: changedEmployeeData, at: employeeRow)
+        // delegate?.didUpdateEmployee(employee: changedEmployeeData, at: employeeRow)
     }
     
     @IBAction func onTapChangeImage(_ sender: Any) {

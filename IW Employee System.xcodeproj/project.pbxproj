@@ -12,6 +12,9 @@
 		BA1B36F422CB4B0900593C34 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B36F322CB4B0900593C34 /* User.swift */; };
 		BA1B36F622CB632100593C34 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B36F522CB632100593C34 /* UserDefaultsHelper.swift */; };
 		BA1B36F822CB70D800593C34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B36F722CB70D800593C34 /* Constants.swift */; };
+		BA29840922D87F42009A20F8 /* EmployeeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA29840822D87F42009A20F8 /* EmployeeDetailsView.swift */; };
+		BA29840B22D87F4E009A20F8 /* EmployeeDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA29840A22D87F4E009A20F8 /* EmployeeDetailsView.xib */; };
+		BA29840E22D8A7CD009A20F8 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA29840D22D8A7CD009A20F8 /* AppTextField.swift */; };
 		BA2AE1BB22C5DB71008A70E2 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AE1BA22C5DB71008A70E2 /* Employee.swift */; };
 		BA63445422C47A4E0024CB25 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63445322C47A4E0024CB25 /* AppTabBarController.swift */; };
 		BA63445722C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63445622C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard */; };
@@ -54,6 +57,9 @@
 		BA1B36F322CB4B0900593C34 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA1B36F522CB632100593C34 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		BA1B36F722CB70D800593C34 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BA29840822D87F42009A20F8 /* EmployeeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailsView.swift; sourceTree = "<group>"; };
+		BA29840A22D87F4E009A20F8 /* EmployeeDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeDetailsView.xib; sourceTree = "<group>"; };
+		BA29840D22D8A7CD009A20F8 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 		BA2AE1BA22C5DB71008A70E2 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		BA63445322C47A4E0024CB25 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
 		BA63445622C47B8C0024CB25 /* AppFunctionalityStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppFunctionalityStoryboard.storyboard; sourceTree = "<group>"; };
@@ -119,6 +125,23 @@
 				F2C1D503B8D016B1FFA0B665 /* Pods_IW_Employee_System.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA29840722D87F23009A20F8 /* EmployeeDetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				BA29840822D87F42009A20F8 /* EmployeeDetailsView.swift */,
+				BA29840A22D87F4E009A20F8 /* EmployeeDetailsView.xib */,
+			);
+			path = EmployeeDetailsView;
+			sourceTree = "<group>";
+		};
+		BA29840C22D8A7B7009A20F8 /* Custom TextField */ = {
+			isa = PBXGroup;
+			children = (
+				BA29840D22D8A7CD009A20F8 /* AppTextField.swift */,
+			);
+			path = "Custom TextField";
 			sourceTree = "<group>";
 		};
 		BA2AE1BE22C5E0BB008A70E2 /* Employee List */ = {
@@ -220,6 +243,8 @@
 		BAB22F2122C9C7EC008FC03A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				BA29840C22D8A7B7009A20F8 /* Custom TextField */,
+				BA29840722D87F23009A20F8 /* EmployeeDetailsView */,
 				BAB22F2222C9C7F6008FC03A /* Cells */,
 			);
 			path = "Custom Views";
@@ -401,6 +426,7 @@
 				BA6A54B722CA093C00468E13 /* EmployeeCollectionViewCell.xib in Resources */,
 				BADBAE9522C1DF4900E38EBA /* LaunchScreen.storyboard in Resources */,
 				BADBAE9F22C1DF7D00E38EBA /* AccountStoryboard.storyboard in Resources */,
+				BA29840B22D87F4E009A20F8 /* EmployeeDetailsView.xib in Resources */,
 				BADBAEAB22C2340000E38EBA /* AccessoryBar.xib in Resources */,
 				BADBAE9222C1DF4900E38EBA /* Assets.xcassets in Resources */,
 				BA63445F22C48A190024CB25 /* HomeStoryboard.storyboard in Resources */,
@@ -489,6 +515,7 @@
 				BA63445422C47A4E0024CB25 /* AppTabBarController.swift in Sources */,
 				BA74AF0822C383D20038DCEF /* IntExtension.swift in Sources */,
 				BADBAEA522C1E03B00E38EBA /* SignUpViewController.swift in Sources */,
+				BA29840922D87F42009A20F8 /* EmployeeDetailsView.swift in Sources */,
 				BADBAE8B22C1DF4700E38EBA /* AppDelegate.swift in Sources */,
 				BA63446322C499C50024CB25 /* DetailsViewController.swift in Sources */,
 				BA63445922C485CC0024CB25 /* HomeViewController.swift in Sources */,
@@ -503,6 +530,7 @@
 				BADBAEAC22C2340000E38EBA /* KeyboardAvoidingViewController.swift in Sources */,
 				BA6A54BE22CA0E5F00468E13 /* Project.swift in Sources */,
 				BA1B36F422CB4B0900593C34 /* User.swift in Sources */,
+				BA29840E22D8A7CD009A20F8 /* AppTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

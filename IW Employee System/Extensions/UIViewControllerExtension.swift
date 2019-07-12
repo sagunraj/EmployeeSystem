@@ -10,7 +10,9 @@ import UIKit
 
 extension UIViewController {
     
-    func showAlert(alertTitle:String, alertMessage: String, alertActionTitle: String, handler: @escaping (UIAlertAction) -> Void) {
+    func showAlert(alertTitle: String = "App name",
+                   alertMessage: String = "There seems to be some error",
+                   alertActionTitle: String = "Ok", handler: @escaping (UIAlertAction) -> Void) {
         
         let alertController = UIAlertController(title: alertTitle,
                                                 message: alertMessage,
@@ -21,8 +23,8 @@ extension UIViewController {
      }
     
     
-    func showAlert(alertTitle:String,
-                   withMessage message: String,
+    func showAlert(alertTitle: String = "App name",
+                   withMessage message: String = "There seems to be some error",
                    okTitle: String = "Yes", okHandler: @escaping () -> Void,
                    cancelTitle: String = "Cancel") {
         

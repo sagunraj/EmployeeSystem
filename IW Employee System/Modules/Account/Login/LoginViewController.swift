@@ -23,7 +23,6 @@ class LoginViewController: KeyboardAvoidingViewController {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance()?.uiDelegate = self
-        googleSignInBtn.style = .wide
         
         
         kaScrollView = scrollView
